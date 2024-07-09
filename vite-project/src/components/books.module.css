@@ -1,0 +1,56 @@
+.addBookBtnClass{
+    width:27%;
+    float: right !important;
+    background-color: gainsboro !important;
+}
+
+.plusIcon{
+    float:left
+}
+
+.searchContainer{
+    margin:0px 0px 0px 0px;
+    /* width: 100px; */
+}
+
+.funnel{
+    float: left;
+}
+
+.searchSize{
+    /* height: 5px !important; */
+    /* width:450px !important; */
+    width:450px !important;
+    font-size: 12px !important;
+}
+
+.searchBar, .searchLabel{
+    /* border-color: gray !important; */
+    border: none !important;
+    border-bottom: 1px solid gray !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.searchBar:focus{
+    border-width: 1.5px !important;
+    border-color: black !important;
+    /* box-shadow: 0.1rem gray   !important; */
+}
+
+.filter{
+    width:71%;
+    float: right;
+    /* opacity: 0.8; */
+    margin: 0px 20px 0px 0px;
+    font-size: 17px !important;
+    border: none !important;
+    /* color: !important; */
+    /* background-color: gainsboro !important; */
+    /* border: 1px solid lightgray !important; */
+    /* color: green !important; */
+}
+
+.spaceAbv{
+    margin-top:15px !important;
+}

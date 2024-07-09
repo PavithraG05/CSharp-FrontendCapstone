@@ -1,0 +1,44 @@
+.biPencilSquare, .biTrash, .biInfo{
+    /* padding-left: 17px; */
+    font-size: 1.2rem;
+    color: black;
+    cursor: pointer;
+}
+
+.truncate{
+    max-width: 670px; /* Adjust max-width as needed */
+    /* max-height: 3.6em !important; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.expanded{
+    max-width: 670px;
+}
+
+.tableHover{
+    cursor: pointer;
+}
+
+.justify{
+    text-align: justify;
+}
+
+.content{
+    padding:5px;
+    margin-left:45px !important;
+}
+
+.booklist{
+    margin-left:40px;
+    padding-top:8px;
+}
+
+.badgesize{
+    font-size: 9px !important;
+}
+
+.squareFill{
+    color: rgb(89, 88, 88) !important;
+}

@@ -1,0 +1,69 @@
+.navbarHeader{
+    /* background-color: navy; */ 
+    /* height: 55px; */
+    /* background-color: darkblue !important; */
+    color: black !important;
+}
+
+/* .navbarBrand{
+
+} */
+
+.navbarBrand img{
+    width:140px;
+    height:30px;
+    margin-left: 10px;
+    margin-top:26px;
+}
+
+.navlinks{
+    font-size:21px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 7px 22px 0px 22px;
+    /* background-color: #5d5eff; */
+}
+
+.navLinkColor{
+    color: black !important;
+}
+
+.navlinkfirst{
+    margin-top: 15px;
+}
+
+.navLinkColor:hover{
+    /* color:  !important; */
+    opacity: 0.65;
+    /* background-color: #5d5eff; */
+}
+
+.content{
+    /* margin-top: 17px !important; */
+    margin:17px 30px 0px 30px!important;
+    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* .navTextColor{
+    color:white !important;
+} */
+
+/* .personCircle, .houseFill{
+    color: white;
+    font-size: 1.4rem;
+    
+}
+
+.todoHeaderDropdown{
+    padding: 0 !important;
+}
+
+.todoHeaderDropdownList{
+    background-color: #5d5eff !important;
+}
+
+.todoHeaderDropdownList:hover{
+    opacity: 0.9 !important;
+    background-color: #5d5eff !important;
+    color: white !important;
+    font-size: 22px;
+} */
