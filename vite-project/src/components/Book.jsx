@@ -48,7 +48,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                 console.log(oneBook)
             }
 
-            <tr className={index === activeIndex ? 'table-active' : ''}>
+            <tr className={`${index === activeIndex ? 'table-active' : ''} ${styles.tableRows}`}>
                 <th scope="row">{index}</th>
                 {!expandIndex && searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{highlightTask(book.title, searchInput)}</td>}
                 {!expandIndex && !searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
@@ -67,7 +67,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                     <>
                     {/* <div className={`row border ${styles.subTable}`}> */}
                         <tr className={styles.expandHover}>
-                            <td colspan="9" className="border border-dark">
+                            <td colspan="9" className="border">
                                 <div className={`row ${styles.content}`}>
                                     <div classsName="col-6">
                                         <div className="fw-bold">

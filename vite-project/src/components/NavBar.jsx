@@ -47,13 +47,13 @@ const NavBar = () => {
                             </span>
                         </a>
                         <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                            <li className={`nav-item ${styles.navlinks}`}>
+                            {/* <li className={`nav-item ${styles.navlinks}`}>
                                 <a href="/" className={`nav-link align-middle px-0 ${styles.navLinkColor} ${styles.navlinkfirst}`}>
                                     <i className="fs-4 bi-house-door"></i> <span className={`ms-1 d-none d-sm-inline`}>Home</span>
                                 </a>
-                            </li>
+                            </li> */}
                             <li className={`nav-item ${styles.navlinks}`}>
-                                <a href="/books" className={`nav-link px-0 align-middle ${styles.navLinkColor}`}>
+                                <a href="/books" className={`nav-link px-0 align-middle ${styles.navLinkColor} ${styles.navlinkfirst}`}>
                                 <i class="fs-4 bi bi-book-half"></i> <span className={`ms-1 d-none d-sm-inline`}>Books</span> </a>
                                 {/* <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                     <li className="w-100">
@@ -103,7 +103,7 @@ const NavBar = () => {
                 <div className={`col py-3 ${styles.content}`}>
                     <BrowserRouter>
                         <Routes>
-                        <Route path="/" element ={<Home/>}/>
+                        {/* <Route path="/" element ={<Home/>}/> */}
                         <Route path="/books" element ={<Books/>}/>
                         <Route path="/authors" element ={<Authors/>}/>
                         <Route path="/genres" element ={<Genres/>}/>

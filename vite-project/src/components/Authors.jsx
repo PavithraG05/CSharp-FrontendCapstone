@@ -112,22 +112,25 @@ const Authors = () => {
     const getIndexCount = () => {
         let startIndex = (currentPage - 1) * itemsPerPage;
         let endIndex = startIndex + itemsPerPage;
+        let totalPages = 0;
+        let length;
         if(!authorSearchInput){
-            const length = authors.length;
+            length = authors.length;
             if(authors.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + authors.slice(startIndex, endIndex).length;
             }
-            startIndex = startIndex + 1;
-            return {startIndex, endIndex, length};
+            totalPages = Math.ceil(authors.length / itemsPerPage)
+            
         }
         else{
-            const length = searchAuthorList.length;
+            length = searchAuthorList.length;
             if(searchAuthorList.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + searchAuthorList.slice(startIndex, endIndex).length;
             }
-            startIndex = startIndex + 1;
-            return {startIndex, endIndex, length};
+            totalPages = Math.ceil(searchAuthorList.length / itemsPerPage)
         }
+        startIndex = startIndex + 1;
+        return {startIndex, endIndex, length, totalPages};
     };
     
     const indexPagination = getIndexCount();
@@ -135,32 +138,35 @@ const Authors = () => {
 
     return(
         <>
+        <div>
             <div className = "row">
-                <div className ="col-6">
+                <div className ="col-4">
                     <h5>Authors Summary</h5>
                 </div>
-                <div className="col-sm-12 col-md-3 col-xl-6">
-                    <button className={`btn fw-bold ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Authors</button>
-                </div>
-            </div>
-            <div className={`row justify-content-between`}>
-                <div className={`col-md-6 col-xl-6 ${styles.searchContainer}`}>
+                <div className={`col-4 ${styles.searchContainer}`}>
                     <div className={`input-group ${styles.searchSize} mb-3`}>
                     <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
                     <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on author name" aria-label="search" value={authorSearchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
                     </div>
                 </div>
-                <div className="col-sm-12 col-md-3 col-xl-3">
+                <div className="col-4">
+                    <button className={`btn fw-bold ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Authors</button>
+                </div>
+            </div>
+            <div className={`row ${styles.spaceAbv} bg-light`}>
+                <div className='col-6'>
+                    <div className={styles.alignEntry}>
+                        <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
+                    </div>
+                </div>
+                <div className="col-6">
                     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
                 </div>
-                {/* <div className="col-sm-12 col-md-3 col-xl-3">
-                    <input type="checkbox" className={`btn-check `} id="btn-check-2-outlined" onClick={handleSort} autocomplete="off" />
-                    <label className={`btn btn-outline-secondary ${styles.filter}`} for="btn-check-2-outlined"><i className={`bi bi-funnel-fill ${styles.funnel}`}></i>Filter</label><br/> */}
-                    {/* <button className={`btn ${styles.todoSortPriority} ${styles.filterColor} `}  onClick={handleSort} type="button" id="addTodosBtn"><i className={`bi bi-funnel-fill ${styles.funnel}`}></i>Sort by Priority</button> */}
-                {/* </div> */}
+                <AuthorTable authors={authors} setAuthors={setAuthors} authorSearchInput={authorSearchInput} displayedItems={displayedItems} setSearchAuthorList={setSearchAuthorList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
             </div>
             <AddAuthor addAuthorModalShow={addAuthorModalShow} setAddAuthorModalShow={setAddAuthorModalShow} authors={authors} setAuthors={setAuthors}/>
-            <AuthorTable authors={authors} setAuthors={setAuthors} authorSearchInput={authorSearchInput} displayedItems={displayedItems} setSearchAuthorList={setSearchAuthorList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
+
+        </div>
         </>
     )
 }

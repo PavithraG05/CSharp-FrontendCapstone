@@ -3,6 +3,8 @@ import styles from './books.module.css'
 import AddBook from './AddBook';
 import BookTable from './BookTable';
 import Pagination from './Pagination';
+import useFetch from './useFetch';
+import ExcelDownload from './ExcelDownload';
 
 const Books = () => {
     
@@ -12,11 +14,15 @@ const Books = () => {
     const [bookError, setBookError] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPage] = useState(0);
-    let itemsPerPage = 15;
     const [searchBookList, setSearchBookList] = useState([])
+    const [filterBookList, setFilterBookList] = useState([])
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
-    
+    const [selectedFilter, setSelectedFilter] = useState("");
+    let itemsPerPage = 15;
+    // const [entry, setEntry] = useState(15);
+
+    // itemsPerPage = entry;
 
     useEffect(()=>{
         async function init(){
@@ -32,6 +38,7 @@ const Books = () => {
                     setBookError("");
                     let totalPages = Math.ceil(json.length / itemsPerPage)
                     setTotalPage(totalPages);
+                    console.log(`${totalPages}`)
                 }
                 else{
                     throw response;
@@ -44,12 +51,25 @@ const Books = () => {
         init();
     },[addModalShow])
 
+    useEffect(()=>{
+        function handleFilter(){
+            const filteredBooks = books.filter(book => book.Genre.genre_name.toLowerCase() === selectedFilter.toLowerCase());
+            console.log(`filter: ${JSON.stringify(filteredBooks)}`)
+            setFilterBookList(filteredBooks)
+        }
+        handleFilter();
+    },[selectedFilter])
+
+    const {data: genresData, genresLoading, genresApiError} = useFetch("genres");
+    if (genresLoading) return "Loading...";
+    if(genresApiError) setGenreError("Error fetching genres using API");
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
         // console.log(`current page: ${currentPage}`)
     };
 
-    function sortAescAuthor(){
+    function sortAescBook(){
         if(sortField === 'title'){
             const sorted = books.slice().sort((a,b)=>{
                 return a.title.localeCompare(b.title);
@@ -82,7 +102,7 @@ const Books = () => {
         }
     }
 
-    function sortDescAuthor(){
+    function sortDescBook(){
         if(sortField === 'title'){
             const sorted = books.slice().sort((a,b)=>{
                 return b[sortField].localeCompare(a[sortField]);
@@ -118,16 +138,16 @@ const Books = () => {
     const getDisplayedItems = () => {
         let startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        if(!searchInput){
+        if(!searchInput && !selectedFilter){
             if(sort === 1){
                 console.log(`${sortField}`);
-                let sortedBook = sortAescAuthor(sortField)
+                let sortedBook = sortAescBook(sortField)
                 let booksList = sortedBook.slice(startIndex, endIndex)
                 return {booksList,startIndex};
             }
             else if(sort === 2){
                 console.log(`${sortField}`);
-                let sortedBook = sortDescAuthor(sortField)
+                let sortedBook = sortDescBook(sortField)
                 let booksList = sortedBook.slice(startIndex, endIndex)
                 return {booksList,startIndex};
             }
@@ -136,6 +156,11 @@ const Books = () => {
                 return {booksList,startIndex};
             }
             
+        }else if(!searchInput && selectedFilter){
+            let booksList = filterBookList.slice(startIndex, endIndex)
+            // startIndex = startIndex + 1;
+            console.log(filterBookList.slice(startIndex, endIndex));
+            return {booksList,startIndex};
         }
         else{
             // console.log(searchBookList.slice(startIndex, endIndex));
@@ -150,22 +175,35 @@ const Books = () => {
     const getIndexCount = () => {
         let startIndex = (currentPage - 1) * itemsPerPage;
         let endIndex = startIndex + itemsPerPage;
-        if(!searchInput){
-            const length = books.length;
+        let totalPages = 0;
+        let length ;
+        // setTotalPage(totalPages);
+        if(!searchInput && !selectedFilter){
+            length = books.length;
             if(books.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + books.slice(startIndex, endIndex).length;
             }
-            startIndex = startIndex + 1;
-            return {startIndex, endIndex, length};
+            totalPages = Math.ceil(books.length / itemsPerPage)
+            
+            // return {startIndex, endIndex, length};
         }
-        else{
-            const length = searchBookList.length;
+        else if(!searchInput && selectedFilter){
+            length = filterBookList.length;
+            if(filterBookList.slice(startIndex, endIndex).length !== itemsPerPage){
+                endIndex = startIndex + filterBookList.slice(startIndex, endIndex).length;
+            }
+            totalPages = Math.ceil(filterBookList.length / itemsPerPage)
+            // return {startIndex, endIndex, length};
+        }else{
+            length = searchBookList.length;
             if(searchBookList.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + searchBookList.slice(startIndex, endIndex).length;
             }
-            startIndex = startIndex + 1;
-            return {startIndex, endIndex, length};
+            totalPages = Math.ceil(searchBookList.length / itemsPerPage)
+            
         }
+        startIndex = startIndex + 1;
+        return {startIndex, endIndex, length, totalPages};
     };
     
     const indexPagination = getIndexCount();
@@ -178,49 +216,83 @@ const Books = () => {
         setSearchInput(e.target.value);
     }
 
-    function handleSort(){
-
+    function getFilterSelect(genre){
+        genre = genre.charAt(0).toUpperCase() + genre.slice(1);
+        setSelectedFilter(genre);
     }
+
+    function handleCancelClick(){
+        setSelectedFilter("")
+    }
+    // function handleEntryBlur(e){
+    //     setEntry(e.target.value)
+    // }
 
     return(
         <>
         <div>
             <div className = "row">
-                <div className ="col-6">
-                    <h5>Books Summary&nbsp;<i class="fa fa-download"></i></h5>
+                <div className ="col-6 p-2">
+                    <h5>Books Summary&nbsp;</h5>
                 </div>
-                {/* <div className={`col-md-6 col-xl-6 ${styles.searchContainer}`}>
-                    <div className={`input-group ${styles.searchSize} mb-3`}>
-                    <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                    <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on book title" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
-                    </div>
-                </div> */}
-                <div className="col-sm-12 col-md-3 col-xl-6">
-                    <button className={`btn fw-bold ${styles.addBookBtnClass} rounded-1`} type="button" onClick={()=>addBook()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Books</button>
-                </div>
-            </div>
-            <div className={`row justify-content-between ${styles.spaceAbv}`}>
-                <div className={`col-md-6 col-xl-6 ${styles.searchContainer}`}>
-                    <div className={`input-group ${styles.searchSize} mb-3`}>
-                    <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                    <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on book title" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                
+                <div className={`col-6`}>
+                    <div className="row">
+                        <div className={`col-8 ${styles.searchContainer}`}>
+                            <div className={`input-group ${styles.searchSize} rounded-3 mb-3 `}>
+                                <span className={`input-group-text ${styles.searchLabel} rounded-3`} id="basic-addon1"><i className="bi bi-search"></i></span>
+                                <input type="text" className={`form-control ${styles.searchBar} rounded-3`} placeholder="Search by book title" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <button className={`btn fw-bold ${styles.addBookBtnClass} rounded-1`} type="button" onClick={()=>addBook()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Books</button>
+                        </div>
                     </div>
                 </div>
-                <div className="col-sm-12 col-md-3 col-xl-3">
-                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
-                </div>
-                {/* <div className="col-sm-12 col-md-3 col-xl-3">
-                    <input type="checkbox" className={`btn-check `} id="btn-check-2-outlined" onClick={handleSort} autocomplete="off" />
-                    <label className={`btn btn-outline-secondary ${styles.filter}`} for="btn-check-2-outlined"><i className={`bi bi-funnel-fill ${styles.funnel}`}></i>Filter</label><br/> */}
-                    {/* <button className={`btn ${styles.todoSortPriority} ${styles.filterColor} `}  onClick={handleSort} type="button" id="addTodosBtn"><i className={`bi bi-funnel-fill ${styles.funnel}`}></i>Sort by Priority</button> */}
+                {/* <div className="col-4 border border-dark"> */}
+                    {/* <button className={`btn fw-bold ${styles.dwnldBtnClass} rounded-1`} type="button"><i className={`bi bi-arrow-down-square-fill ${styles.download}`}></i>Download</button> */}
+                    {/* <ExcelDownload data={books} fileName="book_data"/> */}
                 {/* </div> */}
             </div>
-            <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
-            <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
-        </div>
-        <div>
+            <div className={`row ${styles.spaceAbv} bg-light rounded-2 `}>
+                <div className="col-2">
+                   {/* <div><i class="fa fa-download"></i> &nbsp;Download</div> */}
+                    <div className={styles.alignEntry}>
+                        <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
+                    </div>
+                   
+                </div>
+                <div className="col-4">
+                    <div className="row p-2">
+                        <div className="col-5">
+                            <div className="btn-group">
+                                <button className="btn border border-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-funnel"></i>&nbsp;Filter Genre
+                                </button>
+                                <ul className={`dropdown-menu ${styles.filterBtn}`}>
+                                        {genresData && genresData.map(genre =>{
+                                            return(
+                                            <li className={styles.dropdownList} onClick={()=>getFilterSelect(genre.genre_name)}>{genre.genre_name.charAt(0).toUpperCase() + genre.genre_name.slice(1)}</li>
+                                        )})}
+                                </ul>
+                            </div>
+                        </div>
+                        { selectedFilter && <div className="col-5">
+                            <div className={`${styles.selectFilter} rounded-3`}>
+                                <span className={styles.displayFilter}>{selectedFilter}<i className={`bi bi-x ${styles.filterCancel}`} onClick={handleCancelClick}></i></span>
+                            </div>
+                        </div>}
+                    </div>
+                </div>
+                <div className="col-6">
+                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
+                </div>
+                <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
 
+            </div>
+            <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
         </div>
+        
         </>
     )
 }

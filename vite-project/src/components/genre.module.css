@@ -1,6 +1,11 @@
-.biPencilSquare, .biTrash, .biInfo{
+.bookdisplay{
+    margin-bottom: 10px !important;
+    list-style-type: lower-roman !important;
+}
+
+.biPencilSquare{
     /* padding-left: 17px; */
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: black;
     cursor: pointer;
 }
@@ -28,7 +33,7 @@
 }
 
 .truncate{
-    max-width: 220px; /* Adjust max-width as needed */
+    max-width: 220px !important; /* Adjust max-width as needed */
     /* max-height: 3.6em !important; */
     overflow: hidden;
     text-overflow: ellipsis;

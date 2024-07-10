@@ -210,27 +210,6 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
 
                         <div className="col-6">
                             <div className="form-group p-2">
-                                <label>Genre*</label>
-                                <select className={`form-select ${styles.inputHover}`} name="genre" value={editBookForm.genre} onChange={handleChange} onBlur={handleGenre}>
-                                    
-                                    
-                                    {genres && genres.map((option) => {
-                                        return (
-                                            <option className="text-capitalize" value={option.genre_name} key={option.id} get-key={option.id}>
-                                            {option.genre_name}
-                                            </option>
-                                            
-                                        );
-                                        })}
-                                    
-                                </select>
-                                <div className="form-text">Note: If genre doesn't exist, please navigate to the genre page to add new genre.</div>
-                                {genreError && <div className={`${styles.errorFormField}`}>
-                                        {genreError}
-                                </div>}
-                            </div>
-
-                            <div className="form-group p-2">
                                 <label>Author*</label>
                                 <select className={`form-select ${styles.inputHover}`} size="3" name="author" value={editBookForm.author} onChange={handleChange} onBlur={handleAuthor}>
             
@@ -245,6 +224,26 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                                 <div id="authorHelp" className="form-text">Note: If author doesn't exist, add new author in authors page</div>
                                 {authorError && <div className={`${styles.errorFormField}`}>
                                         {authorError}
+                                </div>}
+                            </div>
+                            <div className="form-group p-2">
+                                <label>Genre*</label>
+                                <select className={`form-select ${styles.inputHover}`} name="genre" value={editBookForm.genre} onChange={handleChange} onBlur={handleGenre}>
+                                    
+                                    
+                                    {genres && genres.map((option) => {
+                                        return (
+                                            <option className="text-capitalize" value={option.genre_name} key={option.id} get-key={option.id}>
+                                            {option.genre_name.charAt(0).toUpperCase() + option.genre_name.slice(1)}
+                                            </option>
+                                            
+                                        );
+                                        })}
+                                    
+                                </select>
+                                <div className="form-text">Note: If genre doesn't exist, please navigate to the genre page to add new genre.</div>
+                                {genreError && <div className={`${styles.errorFormField}`}>
+                                        {genreError}
                                 </div>}
                             </div>
                         </div>

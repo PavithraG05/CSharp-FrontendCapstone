@@ -34,15 +34,15 @@ const BookTable = ({books, setBooks, displayedItems, searchInput, searchBookList
     return(
         
         <div className={`table-responsive ${styles.tableResponsive}`}>
-            <table className={`table table-hover`}>
-                <thead>
+            <table className={`table table-hover ${styles.tableRow}`}>
+                <thead className={styles.rowColor}>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Book Title&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('title')}></i></th>
                         <th scope="col">Publication Date&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('publication_date')}></i></th>
                         <th scope="col">Price&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('price')}></i></th>
                         <th scope="col">Author&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('author')}></i></th>
-                        <th scope="col">Genre&nbsp;<i class="bi bi-funnel"></i>&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('genre')}></i></th>
+                        <th scope="col">Genre&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('genre')}></i></th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">View</th>

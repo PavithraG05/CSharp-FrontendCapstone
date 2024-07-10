@@ -62,7 +62,7 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
                 (
                     <>
                         <tr className={styles.expandHover}>
-                            <td colSpan="9" className="border border-dark">
+                            <td colSpan="9" className="border border-light">
                                 <div className={`${styles.content}`}>
                                     <div className="fw-bold">
                                         Book(s) written by {author.name} available in store: {author.Books.length}

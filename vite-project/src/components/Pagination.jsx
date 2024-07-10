@@ -2,22 +2,22 @@ import styles from './pagination.module.css'
 
 const Pagination = ({currentPage, totalPages, onPageChange, indexPagination}) => {
 
-    const getPageNumbers = () => {
-        const pageNumbers = [];
-        console.log(totalPages)
-        for (let i = 1; i <= totalPages; i++) {
-            pageNumbers.push(i);
-        }
-        console.log(pageNumbers)
-        return pageNumbers;
-    };
+    // const getPageNumbers = () => {
+    //     const pageNumbers = [];
+    //     console.log(totalPages)
+    //     for (let i = 1; i <= totalPages; i++) {
+    //         pageNumbers.push(i);
+    //     }
+    //     console.log(pageNumbers)
+    //     return pageNumbers;
+    // };
 
     const handlePageChange = (page) => {
         // console.log()
         onPageChange(page);
     };
 
-    const pageNumbers = getPageNumbers();
+    // const pageNumbers = getPageNumbers();
 
     return(
         <> 
@@ -48,7 +48,7 @@ const Pagination = ({currentPage, totalPages, onPageChange, indexPagination}) =>
                     </button>
                 </li>
                 ))} */}
-                <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
+                <li className={`page-item ${(currentPage === totalPages || currentPage === indexPagination.totalPages) && 'disabled'}`}>
                 <button
                     className={`page-link ${styles.btnLayout}`}
                     onClick={() => handlePageChange(currentPage + 1)}

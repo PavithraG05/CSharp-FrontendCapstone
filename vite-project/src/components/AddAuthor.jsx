@@ -17,6 +17,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(()=>{
+        setAddAuthor(author);
         setSuccessMessage("")
         setNameError("")
         setbiographyError("")

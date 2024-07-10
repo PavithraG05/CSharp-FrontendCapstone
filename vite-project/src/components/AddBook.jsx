@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useFetch from './useFetch';
 
-const AddBook = ({addModalShow, setAddModalShow,books, setBooks}) => {
+const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
     const book = {
         title:"",
         publication_date:"",
@@ -24,6 +24,7 @@ const AddBook = ({addModalShow, setAddModalShow,books, setBooks}) => {
     const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(()=>{
+        setAddBook(book);
         setSuccessMessage("")
         setTitleError("")
         setPublicationError("")
@@ -183,7 +184,7 @@ const AddBook = ({addModalShow, setAddModalShow,books, setBooks}) => {
                             {genres && genres.map((option) => {
                                 return (
                                     <option key={option.genre_name} value={option.id}>
-                                    {option.genre_name}
+                                    {option.genre_name.charAt(0).toUpperCase() + option.genre_name.slice(1)}
                                     </option>
                                     
                                 );

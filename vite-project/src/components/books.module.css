@@ -1,16 +1,30 @@
 .addBookBtnClass{
-    width:27%;
+    width:100%;
     float: right !important;
     background-color: gainsboro !important;
 }
 
+.dwnldBtnClass{
+    width:15%;
+    background-color: gainsboro !important;
+    margin-left:20px;
+    padding: 0px 0px;
+    height: 70%;
+}
+
+.download{
+    font-size: 1rem !important;
+    
+}
+
 .plusIcon{
-    float:left
+    float:left;
 }
 
 .searchContainer{
-    margin:0px 0px 0px 0px;
+    margin:0px 0px 0px 0px !important;
     /* width: 100px; */
+    
 }
 
 .funnel{
@@ -18,23 +32,35 @@
 }
 
 .searchSize{
-    /* height: 5px !important; */
+    height: 38px !important;
+    float: right !important;
     /* width:450px !important; */
-    width:450px !important;
-    font-size: 12px !important;
+    width:300px !important;
+    font-size: 13px !important;
+    border: 1px solid rgb(83, 82, 82) !important;
 }
 
 .searchBar, .searchLabel{
     /* border-color: gray !important; */
     border: none !important;
-    border-bottom: 1px solid gray !important;
+    /* border-bottom: 1px solid gray !important; */
     border-radius: 0 !important;
     box-shadow: none !important;
 }
 
+.searchLabel{
+    background: #fff !important;
+}
+
+.searchBar{
+    border-left: 0 !important;
+    padding: 6px 9px !important;
+    margin-left: -5px !important;
+}
+
 .searchBar:focus{
     border-width: 1.5px !important;
-    border-color: black !important;
+    /* border-color: black !important; */
     /* box-shadow: 0.1rem gray   !important; */
 }
 
@@ -52,5 +78,121 @@
 }
 
 .spaceAbv{
-    margin-top:15px !important;
+    margin-top:5px !important;
+    /* border: 1px solid darkgray; */
 }
+
+.filterBtn{
+    max-height:200px !important;
+    overflow: scroll;
+    padding-top:0px !important;
+}
+
+.searchFixed{
+    position: sticky; 
+    top: 0; 
+    z-index: 1;
+}
+
+.dropdownList{
+    padding-left:15px;
+    padding-top:3px;
+    cursor: pointer;
+}
+
+.dropdownList:hover, .filterCancel:hover{
+    opacity: 0.7;
+}
+
+.selectFilter{
+    border: 0.7px solid black;
+    padding: 3px;
+    width: 140px;
+    /* float: left; */
+}
+
+.filterCancel{
+    font-size: 1.2rem !important;
+    float: right;
+    cursor: pointer;
+}
+
+.filterCancel:hover{
+    font-size: 1.1rem !important;
+}
+
+.displayFilter{
+    font-size:14px !important;
+    padding-left: 8px;
+}
+
+.divider{
+    padding-left:0px !important;
+}
+
+.dropdownMenuFilter{
+    padding-left:0px !important;
+}
+
+.inputEntry{
+    width: 28px;
+    height:22px;
+    padding-left:4px;
+}
+
+.alignEntry{
+    padding-top: 12px;
+}
+
+.entryText{
+    font-size: 14px;
+    padding-left: 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* .search {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 30px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  
+  .searchTerm:focus{
+    color: #00B4CC;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 30px;
+    border: 1px solid black;
+    background: gainsboro;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  
+  .wrap{
+    width: 20%;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */

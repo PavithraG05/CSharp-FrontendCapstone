@@ -1,5 +1,5 @@
 .tableResponsive {
-    max-height:660px;
+    max-height:700px;
 }
 
 .tableResponsive thead th { 
@@ -8,8 +8,4 @@
 
 .mousehover{
     cursor: pointer;
-}
-
-.rowColor{
-    background-color: rgb(201, 227, 250) !important;
 }

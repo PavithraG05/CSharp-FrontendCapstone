@@ -1,8 +1,7 @@
-.addAuthorBtnClass{
+.addGenreBtnClass{
     width:37%;
     float: right !important;
     background-color: gainsboro !important;
-    /* margin-right:0px !important; */
 }
 
 .plusIcon{
@@ -20,9 +19,9 @@
 
 .searchSize{
     /* height: 5px !important; */
-    width:350px !important;
-    /* width:545px !important; */
-    font-size: 16px !important;
+    /* width:450px !important; */
+    width:450px !important;
+    font-size: 12px !important;
 }
 
 .searchBar, .searchLabel{
@@ -53,7 +52,7 @@
 }
 
 .spaceAbv{
-    margin-top:5px !important;
+    margin-top:15px !important;
 }
 
 .inputEntry{
