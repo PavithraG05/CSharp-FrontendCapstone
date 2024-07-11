@@ -3,7 +3,9 @@
     /* height: 55px; */
     /* background-color: darkblue !important; */
     color: black !important;
-    background-color: #f2f2f2;
+    /* background-color: #20358d; */
+    /* background-color: #27439c; */
+    background-color: #3a4c86;
 }
 
 /* .navbarBrand{
@@ -13,19 +15,19 @@
 .navbarBrand img{
     width:140px;
     height:30px;
-    margin-left: 10px;
-    margin-top:26px;
+    margin-left: 3px;
+    margin-top:22px;
 }
 
 .navlinks{
     font-size:21px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 12px 22px 0px 22px;
+    padding: 5px 28px 5px 28px;
     /* background-color: #5d5eff; */
 }
 
 .navLinkColor{
-    color: black !important;
+    color: white !important;
 }
 
 .navlinkfirst{
@@ -38,11 +40,11 @@
     /* background-color: #5d5eff; */
 }
 
-.content{
-    /* margin-top: 17px !important; */
-    margin:0px 30px 0px 30px!important;
-    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    /* background-color: aliceblue !important; */
+.logoImg{
+    width: 40px !important;
+    height: 30px !important;
+    padding-top: 0px;
+    margin-top: 17px !important;
 }
 
 /* .navTextColor{

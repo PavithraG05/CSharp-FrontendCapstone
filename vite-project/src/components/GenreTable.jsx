@@ -38,8 +38,8 @@ const GenreTable = ({genres, setGenres, displayedItems, searchInput, searchGenre
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Genre Name&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('genre_name')}></i></th>
-                        <th scope="col">No. of Books in Genre&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('count')}></i></th>
+                        <th scope="col">Genre Name&nbsp;<i className={`fa ${(sortField==='genre_name'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('genre_name')}></i></th>
+                        <th scope="col">No. of Books in Genre&nbsp;<i className={`fa ${(sortField==='count'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('count')}></i></th>
                         <th scope="col">Genre - Book List</th>
                         <th scope="col">Edit</th>
                     </tr>

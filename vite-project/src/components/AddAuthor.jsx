@@ -35,8 +35,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
                 body: JSON.stringify(addAuthor)
             }
         )
-        .then((response) => {response.json()   
-        })
+        .then((response) => response.json())
         .then((data) => {
             // alert("Todo added successfully");
             setSuccessMessage("Author added successfully!!");

@@ -44,7 +44,7 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
                 {!expandIndex && <td className={`${styles.truncate} align-middle`} onClick={()=>expandCell()}>
                     {genre.Books.map((book,index) => {
                                         return(
-                                            <span>{book.title} - {book.Author.name}</span> 
+                                            <span >{book.title} - {book.Author.name}</span> 
                                         )
                     })}
                     {!genre.Books.length &&
@@ -56,7 +56,7 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
                     {genre.Books.map((book,index) => {
                                         return(
                                             <>
-                                                <span>{book.title} - {book.Author.name}</span><br/>
+                                                <span className={styles.genreBooks}>{book.title} - {book.Author.name} </span><br/>
                                             </>
                                         )
                                     })}

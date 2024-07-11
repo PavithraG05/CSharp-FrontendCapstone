@@ -36,8 +36,7 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
                 body: JSON.stringify(addGenre)
             }
         )
-        .then((response) => {response.json()   
-        })
+        .then((response) => response.json())
         .then((data) => {
             // alert("Todo added successfully");
             setSuccessMessage("Genre added successfully!!");

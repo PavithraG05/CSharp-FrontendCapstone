@@ -47,9 +47,7 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
                 genre_name:editGenreForm.genre_name
             })
             })
-            .then(response => {
-                response.json();
-            })
+            .then(response => response.json())
             .then (json => {
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');

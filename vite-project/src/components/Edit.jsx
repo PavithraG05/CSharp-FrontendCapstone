@@ -83,9 +83,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                 author_id:editBookForm.author_id
             })
             })
-            .then(response => {
-                response.json();
-            })
+            .then(response => response.json())
             .then (json => {
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');

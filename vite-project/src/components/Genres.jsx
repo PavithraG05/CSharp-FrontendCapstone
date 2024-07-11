@@ -3,8 +3,9 @@ import styles from './genres.module.css'
 import AddGenre from "./AddGenre";
 import Pagination from './Pagination';
 import GenreTable from "./GenreTable";
+import NavBar from "./NavBar";
 
-const Genres = () => {
+const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     
     const [addGenreModalShow, setAddGenreModalShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
@@ -12,7 +13,7 @@ const Genres = () => {
     const [genreError, setGenreError] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPage] = useState(0);
-    let itemsPerPage = 20;
+    let itemsPerPage = 15;
     const [searchGenreList, setSearchGenreList] = useState([])
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
@@ -43,6 +44,7 @@ const Genres = () => {
         init();
     },[addGenreModalShow])
 
+    // console.log()
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -141,40 +143,44 @@ const Genres = () => {
         setSearchInput(e.target.value);
     }
     
+    console.log(loginSuccessState);
     return(
         <>
-            <div>
-                <div className = "row">
-                    <div className ="col-4">
-                        <h5>Genres Summary&nbsp;</h5>
-                    </div>
-                    <div className={`col-4 ${styles.searchContainer}`}>
-                        <div className={`input-group ${styles.searchSize} mb-3`}>
-                        <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                        <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on Genre" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+        <div className="container-fluid">
+            <div className="row flex-nowrap">
+                <NavBar setLoginSuccessState = {setLoginSuccessState}/>
+                
+                <div className={`col py-3 ${styles.content}`}>
+                    <div className = "row">
+                        <div className ="col-4">
+                            <h5>Genres Summary&nbsp;</h5>
+                        </div>
+                        <div className={`col-4 ${styles.searchContainer}`}>
+                            <div className={`input-group ${styles.searchSize} mb-3`}>
+                            <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
+                            <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on Genre" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <button className={`btn fw-bold ${styles.addGenreBtnClass} rounded-1`} type="button" onClick={()=>addGenre()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Genres</button>
                         </div>
                     </div>
-                    <div className="col-4">
-                        <button className={`btn fw-bold ${styles.addGenreBtnClass} rounded-1`} type="button" onClick={()=>addGenre()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Genres</button>
-                    </div>
-                </div>
-                <div className={`row ${styles.spaceAbv} bg-light`}>
-                    <div className='col-6'>
-                        <div className={styles.alignEntry}>
-                            <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
+                    <div className={`row ${styles.spaceAbv} bg-light`}>
+                        <div className='col-6'>
+                            <div className={styles.alignEntry}>
+                                <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-6">
-                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
-                    </div>
-                    <GenreTable genres={genres} setGenres={setGenres} displayedItems={displayedItems} searchInput={searchInput} searchGenreList={searchGenreList} setSearchGenreList={setSearchGenreList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
+                        <div className="col-6">
+                            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
+                        </div>
+                        <GenreTable genres={genres} setGenres={setGenres} displayedItems={displayedItems} searchInput={searchInput} searchGenreList={searchGenreList} setSearchGenreList={setSearchGenreList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
 
+                    </div>
+                    <AddGenre addGenreModalShow={addGenreModalShow} setAddGenreModalShow={setAddGenreModalShow} genres={genres} setGenres={setGenres}/>
                 </div>
-                <AddGenre addGenreModalShow={addGenreModalShow} setAddGenreModalShow={setAddGenreModalShow} genres={genres} setGenres={setGenres}/>
             </div>
-            <div>
-
-            </div>
+        </div>
         </>
     )
 }

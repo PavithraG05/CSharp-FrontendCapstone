@@ -5,8 +5,9 @@ import BookTable from './BookTable';
 import Pagination from './Pagination';
 import useFetch from './useFetch';
 import ExcelDownload from './ExcelDownload';
+import NavBar from './NavBar';
 
-const Books = () => {
+const Books = ({loginSuccessState, setLoginSuccessState}) => {
     
     const [addModalShow, setAddModalShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
@@ -19,7 +20,7 @@ const Books = () => {
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
-    let itemsPerPage = 15;
+    let itemsPerPage = 20;
     // const [entry, setEntry] = useState(15);
 
     // itemsPerPage = entry;
@@ -68,6 +69,8 @@ const Books = () => {
         setCurrentPage(page);
         // console.log(`current page: ${currentPage}`)
     };
+
+    console.log(loginSuccessState);
 
     function sortAescBook(){
         if(sortField === 'title'){
@@ -230,69 +233,76 @@ const Books = () => {
 
     return(
         <>
-        <div>
-            <div className = "row">
-                <div className ="col-6 p-2">
-                    <h5>Books Summary&nbsp;</h5>
-                </div>
+         <div className="container-fluid">
+            <div className="row flex-nowrap">
+                <NavBar setLoginSuccessState={setLoginSuccessState}/>
                 
-                <div className={`col-6`}>
-                    <div className="row">
-                        <div className={`col-8 ${styles.searchContainer}`}>
-                            <div className={`input-group ${styles.searchSize} rounded-3 mb-3 `}>
-                                <span className={`input-group-text ${styles.searchLabel} rounded-3`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                                <input type="text" className={`form-control ${styles.searchBar} rounded-3`} placeholder="Search by book title" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                <div className={`col py-3 ${styles.content}`}>
+                    <div className = "row">
+                        <div className ="col-6 p-2">
+                            <h5 className={styles.summary}>Books Summary&nbsp;</h5>
+                        </div>
+                        
+                        <div className={`col-6`}>
+                            <div className="row">
+                                <div className={`col-8 ${styles.searchContainer}`}>
+                                    <div className={`input-group ${styles.searchSize} rounded-3 mb-3 `}>
+                                        <span className={`input-group-text ${styles.searchLabel} rounded-3`} id="basic-addon1"><i className={`bi bi-search ${styles.searchIncon}`}></i></span>
+                                        <input type="text" className={`form-control ${styles.searchBar} rounded-3`} placeholder="Search by book title" aria-label="search" value={searchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                                    </div>
+                                </div>
+                                <div className="col-4">
+                                    <button className={`btn ${styles.addBookBtnClass} rounded-1`} onClick={()=>addBook()}><i className={`bi bi-plus-square ${styles.plusIcon}`}></i>Add Books</button>
+                                </div>
                             </div>
+                        </div>
+                        {/* <div className="col-4 border border-dark"> */}
+                            {/* <button className={`btn fw-bold ${styles.dwnldBtnClass} rounded-1`} type="button"><i className={`bi bi-arrow-down-square-fill ${styles.download}`}></i>Download</button> */}
+                            {/* <ExcelDownload data={books} fileName="book_data"/> */}
+                        {/* </div> */}
+                    {/* <hr/> */}
+                    </div>
+                    
+                    <div className={`row ${styles.spaceAbv} rounded-2 `}>
+                        <div className="col-2">
+                        {/* <div><i class="fa fa-download"></i> &nbsp;Download</div> */}
+                            <div className={styles.alignEntry}>
+                                <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry} rounded-1`}/></span>
+                            </div>
+                        
                         </div>
                         <div className="col-4">
-                            <button className={`btn fw-bold ${styles.addBookBtnClass} rounded-1`} type="button" onClick={()=>addBook()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Books</button>
-                        </div>
-                    </div>
-                </div>
-                {/* <div className="col-4 border border-dark"> */}
-                    {/* <button className={`btn fw-bold ${styles.dwnldBtnClass} rounded-1`} type="button"><i className={`bi bi-arrow-down-square-fill ${styles.download}`}></i>Download</button> */}
-                    {/* <ExcelDownload data={books} fileName="book_data"/> */}
-                {/* </div> */}
-            </div>
-            <div className={`row ${styles.spaceAbv} bg-light rounded-2 `}>
-                <div className="col-2">
-                   {/* <div><i class="fa fa-download"></i> &nbsp;Download</div> */}
-                    <div className={styles.alignEntry}>
-                        <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
-                    </div>
-                   
-                </div>
-                <div className="col-4">
-                    <div className="row p-2">
-                        <div className="col-5">
-                            <div className="btn-group">
-                                <button className="btn border border-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-funnel"></i>&nbsp;Filter Genre
-                                </button>
-                                <ul className={`dropdown-menu ${styles.filterBtn}`}>
-                                        {genresData && genresData.map(genre =>{
-                                            return(
-                                            <li className={styles.dropdownList} onClick={()=>getFilterSelect(genre.genre_name)}>{genre.genre_name.charAt(0).toUpperCase() + genre.genre_name.slice(1)}</li>
-                                        )})}
-                                </ul>
+                            <div className="row p-2">
+                                <div className="col-5">
+                                    <div className="btn-group">
+                                        <button className={`btn  btn-sm dropdown-toggle ${styles.btnFilter}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i className={`bi bi-funnel-fill ${styles.filterIcon}`}></i>&nbsp;<span className={styles.filterIcon}>Filter Genre</span>
+                                        </button>
+                                        <ul className={`dropdown-menu ${styles.filterBtn}`}>
+                                                {genresData && genresData.map(genre =>{
+                                                    return(
+                                                    <li className={styles.dropdownList} onClick={()=>getFilterSelect(genre.genre_name)}>{genre.genre_name.charAt(0).toUpperCase() + genre.genre_name.slice(1)}</li>
+                                                )})}
+                                        </ul>
+                                    </div>
+                                </div>
+                                { selectedFilter && <div className="col-5">
+                                    <div className={`${styles.selectFilter} rounded-3`}>
+                                        <span className={styles.displayFilter}>{selectedFilter}<i className={`bi bi-x ${styles.filterCancel}`} onClick={handleCancelClick}></i></span>
+                                    </div>
+                                </div>}
                             </div>
                         </div>
-                        { selectedFilter && <div className="col-5">
-                            <div className={`${styles.selectFilter} rounded-3`}>
-                                <span className={styles.displayFilter}>{selectedFilter}<i className={`bi bi-x ${styles.filterCancel}`} onClick={handleCancelClick}></i></span>
-                            </div>
-                        </div>}
-                    </div>
-                </div>
-                <div className="col-6">
-                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
-                </div>
-                <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
+                        <div className="col-6">
+                            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
+                        </div>
+                        <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
 
+                    </div>
+                    <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
+                </div>
             </div>
-            <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
         </div>
-        
         </>
     )
 }

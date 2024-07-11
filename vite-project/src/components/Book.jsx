@@ -48,7 +48,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                 console.log(oneBook)
             }
 
-            <tr className={`${index === activeIndex ? 'table-active' : ''} ${styles.tableRows}`}>
+            <tr className={`${index === activeIndex ? '' : ''} ${styles.tableRows}`}>
                 <th scope="row">{index}</th>
                 {!expandIndex && searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{highlightTask(book.title, searchInput)}</td>}
                 {!expandIndex && !searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
@@ -60,7 +60,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                 <td className="text-capitalize">{book.Genre.genre_name}</td>
                 <td className="text-center"><i className={`bi bi-pencil-square ${styles.biPencilSquare}`} onClick={()=>handleEdit()}></i></td>
                 <td className="text-center"><i className={`bi bi-trash ${styles.biTrash}`} onClick={()=>handleDelete()}></i></td>   
-                <td className="text-center"><i className={`bi ${styles.biInfo} ${index === activeIndex?`${styles.squareFill} bi-caret-down-square-fill`:"bi-caret-down-square"}`} onClick={()=>toggleAccordion(index)}></i></td>
+                <td className="text-center"><i className={`bi ${styles.biInfo} ${index === activeIndex?`${styles.squareFill} bi-caret-up`:"bi-caret-down-fill"}`} onClick={()=>toggleAccordion(index)}></i></td>
             </tr>
             {index === activeIndex && 
                 (

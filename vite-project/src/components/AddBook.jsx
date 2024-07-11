@@ -56,8 +56,7 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
                 body: JSON.stringify(addBook)
             }
         )
-        .then((response) => {response.json()   
-        })
+        .then((response) => response.json())
         .then((data) => {
             // alert("Todo added successfully");
             setSuccessMessage("Book added successfully!!");

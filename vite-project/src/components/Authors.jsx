@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import AuthorTable from './AuthorTable';
 import AddAuthor from './AddAuthor';
 import Pagination from './Pagination';
+import NavBar from './NavBar';
 
-const Authors = () => {
+const Authors = ({loginSuccessState, setLoginSuccessState}) => {
 
     // const [searchInput, setsearchInput]
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
@@ -134,38 +135,44 @@ const Authors = () => {
     };
     
     const indexPagination = getIndexCount();
-
+    console.log(loginSuccessState);
 
     return(
         <>
-        <div>
-            <div className = "row">
-                <div className ="col-4">
-                    <h5>Authors Summary</h5>
-                </div>
-                <div className={`col-4 ${styles.searchContainer}`}>
-                    <div className={`input-group ${styles.searchSize} mb-3`}>
-                    <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                    <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on author name" aria-label="search" value={authorSearchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
-                    </div>
-                </div>
-                <div className="col-4">
-                    <button className={`btn fw-bold ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Authors</button>
-                </div>
-            </div>
-            <div className={`row ${styles.spaceAbv} bg-light`}>
-                <div className='col-6'>
-                    <div className={styles.alignEntry}>
-                        <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
-                    </div>
-                </div>
-                <div className="col-6">
-                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
-                </div>
-                <AuthorTable authors={authors} setAuthors={setAuthors} authorSearchInput={authorSearchInput} displayedItems={displayedItems} setSearchAuthorList={setSearchAuthorList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
-            </div>
-            <AddAuthor addAuthorModalShow={addAuthorModalShow} setAddAuthorModalShow={setAddAuthorModalShow} authors={authors} setAuthors={setAuthors}/>
+        <div className="container-fluid">
+            <div className="row flex-nowrap">
+                <NavBar setLoginSuccessState={setLoginSuccessState}/>
+                
+                <div className={`col py-3 ${styles.content}`}>
 
+                    <div className = "row">
+                        <div className ="col-4">
+                            <h5>Authors Summary</h5>
+                        </div>
+                        <div className={`col-4 ${styles.searchContainer}`}>
+                            <div className={`input-group ${styles.searchSize} mb-3`}>
+                            <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
+                            <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on author name" aria-label="search" value={authorSearchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                            </div>
+                        </div>
+                        <div className="col-4">
+                            <button className={`btn fw-bold ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Authors</button>
+                        </div>
+                    </div>
+                    <div className={`row ${styles.spaceAbv} bg-light`}>
+                        <div className='col-6'>
+                            <div className={styles.alignEntry}>
+                                <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry}`}/></span>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
+                        </div>
+                        <AuthorTable authors={authors} setAuthors={setAuthors} authorSearchInput={authorSearchInput} displayedItems={displayedItems} setSearchAuthorList={setSearchAuthorList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
+                    </div>
+                    <AddAuthor addAuthorModalShow={addAuthorModalShow} setAddAuthorModalShow={setAddAuthorModalShow} authors={authors} setAuthors={setAuthors}/>
+                </div>
+            </div>
         </div>
         </>
     )

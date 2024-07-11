@@ -36,8 +36,8 @@ const AuthorTable = ({authors, setAuthors, authorSearchInput, displayedItems, se
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Author Name&nbsp;<span class="bi bi-caret-up" onClick={()=>handleSort('name')}></span><span class="bi bi-caret-down" onClick={()=>handleSort('name')}></span></th>
-                        <th scope="col">Biography&nbsp;<i className={`fa fa-sort ${styles.mousehover}`} onClick={()=>handleSort('biography')}></i></th>
+                        <th scope="col">Author Name&nbsp;<i className={`fa ${(sortField==='name'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('name')}></i></th>
+                        <th scope="col">Biography&nbsp;<i className={`fa ${(sortField==='biography'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('biography')}></i></th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         <th scope="col">View</th>

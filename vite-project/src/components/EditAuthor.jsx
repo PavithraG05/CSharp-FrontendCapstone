@@ -51,9 +51,7 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
                 biography:editAuthorForm.biography
             })
             })
-            .then(response => {
-                response.json();
-            })
+            .then(response => response.json())
             .then (json => {
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');

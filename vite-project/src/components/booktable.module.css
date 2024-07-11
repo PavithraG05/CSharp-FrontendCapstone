@@ -1,15 +1,22 @@
 .tableResponsive {
-    max-height:660px;
+    max-height:690px;
+    /* border-radius: 20px !important; */
 }
 
 .tableResponsive thead th { 
-    position: sticky; top: 0; z-index: 1; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1; 
+    
 }
 
 .mousehover{
     cursor: pointer;
+    /* color: white !important; */
 }
 
-.rowColor{
-    background-color: rgb(201, 227, 250) !important;
+.rowColor th{
+    /* background-color: rgb(201, 227, 250) !important; */
+    /* background-color: #5771ca !important; */
+    /* color: white !important; */
 }

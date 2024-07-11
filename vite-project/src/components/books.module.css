@@ -1,8 +1,11 @@
 .addBookBtnClass{
     width:100%;
     float: right !important;
-    background-color: gainsboro !important;
+    background-color: #4e65b3 !important;
+    color: white !important
+    /* border: 1px solid #617ee0; */
 }
+/* 071755 */
 
 .dwnldBtnClass{
     width:15%;
@@ -32,12 +35,19 @@
 }
 
 .searchSize{
-    height: 38px !important;
+    height: 39px !important;
     float: right !important;
     /* width:450px !important; */
     width:300px !important;
     font-size: 13px !important;
-    border: 1px solid rgb(83, 82, 82) !important;
+    border-bottom: 1px solid rgb(83, 82, 82) !important;
+    /* border-left: 1px solid rgb(83, 82, 82) !important; */
+    /* border-bottom: 1.7px solid #617ee0 !important; */
+    /* color: #617ee0 !important; */
+}
+
+.searchIncon{
+    /* color: #5771ca!important; */
 }
 
 .searchBar, .searchLabel{
@@ -79,6 +89,8 @@
 
 .spaceAbv{
     margin-top:5px !important;
+    /* background-color: #617ee0; */
+    /* opacity: 0.3 !important; */
     /* border: 1px solid darkgray; */
 }
 
@@ -105,25 +117,37 @@
 }
 
 .selectFilter{
-    border: 0.7px solid black;
-    padding: 3px;
+    /* border: 0.7px solid black; */
+    padding: 4px;
     width: 140px;
+    /* border: 1px solid #617ee0 !important; */
+    border: 1px solid rgb(83, 82, 82) !important;
+    cursor: pointer
     /* float: left; */
 }
 
 .filterCancel{
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     float: right;
     cursor: pointer;
+    color: rgb(83, 82, 82)!important;
+    /* color:  !important; */
+    padding-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .filterCancel:hover{
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    /* opacity: 0.8; */
 }
 
 .displayFilter{
-    font-size:14px !important;
+    font-size:14.5px !important;
+    font-weight:500;
     padding-left: 8px;
+    /* width: 200px !important; */
+    /* color: #617ee0 !important; */
+    color: rgb(83, 82, 82)!important;
 }
 
 .divider{
@@ -138,6 +162,8 @@
     width: 28px;
     height:22px;
     padding-left:4px;
+    color: black !important;
+    border: 1.7px solid black !important;
 }
 
 .alignEntry{
@@ -145,14 +171,44 @@
 }
 
 .entryText{
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500 !important;
     padding-left: 3px;
+    color: black !important;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.content{
+    /* margin-top: 17px !important; */
+    margin:0px 30px 0px 30px!important;
+    /* font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-size: 15px !important;
+    /* background-color: aliceblue !important; */
+}
+
+.btnFilter{
+    border: 1.7px solid rgb(83, 82, 82) !important;
+    color: rgb(83, 82, 82)!important;
+    width: 135px !important;
+}
+
+.filterIcon{
+    color: rgb(83, 82, 82)!important;
+}
+
+::placeholder {
+    /* color: #617ee0 !important;
+    opacity: 1;  */
+  }
+
+.summary{
+    /* color: #617ee0 !important;
+    font-weight: 800; */
 }
 
 /* .search {
