@@ -109,7 +109,7 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
         <>
         <Modal show={addGenreModalShow} onHide={handleClose} centered className={`${styles.font} modal-md`}>
             <Modal.Header closeButton>
-                <Modal.Title>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Genre</Modal.Title>
+                <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Genre</span></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -132,7 +132,7 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                     Add Genre
                 </Button>
             </Modal.Footer>

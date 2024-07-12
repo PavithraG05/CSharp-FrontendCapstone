@@ -13,3 +13,8 @@
     padding:10px 0px;
     font-weight: 600;
 }
+
+.btnColor{
+    background-color: #4e65b3 !important;
+    color: white !important
+}

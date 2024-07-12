@@ -33,15 +33,15 @@ const NavBar = ({setLoginSuccessState}) => {
                     </li> */}
                     <li className={`nav-item ${styles.navlinks}`}>
                         <a href="/books" className={`nav-link px-0 align-middle ${styles.navLinkColor} ${styles.navlinkfirst}`}>
-                        <i class="fs-4 bi-journal-text"></i> <span className={`ms-1 d-none d-sm-inline`}>Books</span> </a>
+                        <i class="fs-4 bi-journal-text"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Books</span> </a>
                     </li>
                     <li className={`nav-item ${styles.navlinks}`}>
                         <a href="/authors" className={`nav-link px-0 align-middle ${styles.navLinkColor}`}>
-                            <i class="fs-4 bi bi-person-lines-fill"></i> <span className={`ms-1 d-none d-sm-inline`}>Authors</span></a>
+                            <i class="fs-4 bi bi-person-lines-fill"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Authors</span></a>
                     </li>
                     <li className={`nav-item ${styles.navlinks}`}>
                         <a href="/genres" className={`nav-link px-0 align-middle ${styles.navLinkColor}`}>
-                            <i class="fs-4 bi bi-list-stars"></i> <span className={`ms-1 d-none d-sm-inline`}>Genres</span></a>
+                            <i class="fs-4 bi bi-list-stars"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Genres</span></a>
                     </li>
                     
                 </ul>

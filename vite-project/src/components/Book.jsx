@@ -68,23 +68,40 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                     {/* <div className={`row border ${styles.subTable}`}> */}
                         <tr className={styles.expandHover}>
                             <td colspan="9" className="border">
-                                <div className={`row ${styles.content}`}>
-                                    <div classsName="col-6">
-                                        <div className="fw-bold">
-                                            {book.title} by {book.Author.name} &nbsp; &nbsp;
+                                {/* <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="/book1.jpg" className={`img-fluid rounded-start ${styles.bookImg}`} alt="..."/>
                                         </div>
-                                        <span className={`badge text-bg-light border border-dark ${styles.badgesize} text-capitalize`}>
-                                            {book.Genre.genre_name}
-                                        </span>
-                                        <div className={styles.subcontent}>
-                                            {/* <br/> */}
-                                            Price: <i class="bi bi-currency-rupee"></i>{book.price}
-                                        </div>
-                                        <div>
-                                            Publication Date: {book.publication_date}
+                                        <div className="col-md-8">
+                                            <div className="card-body">
+                                                <h5 className="card-title">Card title</h5>
+                                                <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                <p classname="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+                                            </div>
                                         </div>
                                     </div>
-                                
+                                </div> */}
+                                <div className={`row ${styles.content}`}>
+                                    <div classsName="col-6">
+                                        <div className = "row">
+                                            <div classsName="col-xl-6">
+                                                <div className="fw-bold">
+                                                    {book.title} by {book.Author.name} &nbsp; &nbsp;
+                                                </div>
+                                                <span className={`badge text-bg-light border border-dark ${styles.badgesize} text-capitalize`}>
+                                                    {book.Genre.genre_name}
+                                                </span>
+                                                <div className={styles.subcontent}>
+                                                    
+                                                    Price: <i class="bi bi-currency-rupee"></i>{book.price}
+                                                </div>
+                                                <div>
+                                                    Publication Date: {book.publication_date}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div classsName="col-6"> 
                                         <br/>   
                                         <div className="fw-bold">

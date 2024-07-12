@@ -21,6 +21,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
     const [sortField, setSortField] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
     let itemsPerPage = 20;
+    // const [bookFunc, setBookFunc] = useState([]);
     // const [entry, setEntry] = useState(15);
 
     // itemsPerPage = entry;
@@ -36,6 +37,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                     console.log(JSON.stringify(json));
                     console.log(json.length);
                     setBooks(json);
+                    // setBookFunc(json);
                     setBookError("");
                     let totalPages = Math.ceil(json.length / itemsPerPage)
                     setTotalPage(totalPages);
@@ -54,9 +56,10 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
 
     useEffect(()=>{
         function handleFilter(){
-            const filteredBooks = books.filter(book => book.Genre.genre_name.toLowerCase() === selectedFilter.toLowerCase());
+            const filteredBooks =  books.filter(book => book.Genre.genre_name.toLowerCase() === selectedFilter.toLowerCase());
             console.log(`filter: ${JSON.stringify(filteredBooks)}`)
             setFilterBookList(filteredBooks)
+            // setBookFunc(filteredBooks);
         }
         handleFilter();
     },[selectedFilter])
@@ -141,33 +144,35 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
     const getDisplayedItems = () => {
         let startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        if(!searchInput && !selectedFilter){
-            if(sort === 1){
-                console.log(`${sortField}`);
-                let sortedBook = sortAescBook(sortField)
-                let booksList = sortedBook.slice(startIndex, endIndex)
+        if(!searchInput){
+            if(!selectedFilter){
+                if(sort === 1){
+                    console.log(`${sortField}`);
+                    let sortedBook = sortAescBook(sortField)
+                    let booksList = sortedBook.slice(startIndex, endIndex)
+                    return {booksList,startIndex};
+                }
+                else if(sort === 2){
+                    console.log(`${sortField}`);
+                    let sortedBook = sortDescBook(sortField)
+                    let booksList = sortedBook.slice(startIndex, endIndex)
+                    return {booksList,startIndex};
+                }
+                else{
+                    let booksList = books.slice(startIndex, endIndex)
+                    return {booksList,startIndex};
+                }
+            }else if(selectedFilter){
+                let booksList = filterBookList.slice(startIndex, endIndex)
+                // startIndex = startIndex + 1;
+                console.log(filterBookList.slice(startIndex, endIndex));
                 return {booksList,startIndex};
             }
-            else if(sort === 2){
-                console.log(`${sortField}`);
-                let sortedBook = sortDescBook(sortField)
-                let booksList = sortedBook.slice(startIndex, endIndex)
-                return {booksList,startIndex};
-            }
-            else{
-                let booksList = books.slice(startIndex, endIndex)
-                return {booksList,startIndex};
-            }
-            
-        }else if(!searchInput && selectedFilter){
-            let booksList = filterBookList.slice(startIndex, endIndex)
-            // startIndex = startIndex + 1;
-            console.log(filterBookList.slice(startIndex, endIndex));
-            return {booksList,startIndex};
         }
-        else{
+        else if(searchInput){
             // console.log(searchBookList.slice(startIndex, endIndex));
-            let booksList = searchBookList.slice(startIndex, endIndex)
+            let booksList = searchBookList.slice(startIndex, endIndex);
+
             // startIndex = startIndex + 1;
             return {booksList,startIndex};
         }
@@ -267,7 +272,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                         <div className="col-2">
                         {/* <div><i class="fa fa-download"></i> &nbsp;Download</div> */}
                             <div className={styles.alignEntry}>
-                                <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry} rounded-1`}/></span>
+                                <span className={styles.entryText}>Showing entries: &nbsp;<input type="number" value={itemsPerPage} className={`${styles.inputEntry} rounded-1` }/></span>
                             </div>
                         
                         </div>
@@ -296,7 +301,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                         <div className="col-6">
                             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} indexPagination={indexPagination}/>
                         </div>
-                        <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField}/>
+                        <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField} filterBookList={filterBookList}/>
 
                     </div>
                     <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>

@@ -1,6 +1,7 @@
 import styles from './login.module.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import LoginNav from './LoginNav';
 
 const Login = ({setLoginSuccessState}) => {
 
@@ -103,34 +104,53 @@ const Login = ({setLoginSuccessState}) => {
 
     return(
         <>
-        <div className={`${styles.loginContainer} rounded-0`}>
-            <form>
-                <div className="form-group p-2">
-                    <label className="form-label">Username*</label>
-                    <input type="text" className={nameError?`${styles.fieldBorderColor} form-control`:"form-control"} value={login.username} name="username" onChange={handleChange} onBlur={handleName}/>
-                    {nameError && <div className={styles.errorFormField}>
-                        {nameError}
-                    </div>}
+        {/* <LoginNav/> */}
+        <div className="row">
+            <div className = "col-6">
+                <div className={styles.imgContainer}>
+                    <img src="./bookshelf-1.jpg" className={styles.loginimg}/>
                 </div>
-                    
-                <div className="form-group p-2">
-                    <label className="form-label">Password* </label>
-                    <input type={showPassword?"password":"text"} className={ passwordError ? `${styles.fieldBorderColor} form-control`:"form-control"} name="password" value={login.password} onChange={handleChange} onBlur={handlePassword}/>
-                    <i className={`bi bi-eye-fill ${styles.eyeFill}`} onClick = {showHidePassword}></i>
-                    {passwordError && <div className={styles.errorFormField}>
-                        {passwordError}
-                    </div>}
+            </div>
+            <div className="col-6">
+                <div>
+                    <a href="/login" className={`d-flex align-items-center pb-0 mb-md-0 me-md-auto ${styles.navbarBrand}`}>
+                        <img src="/book_logo.png" className={styles.logoImg}/>
+                        <span className="d-none d-sm-inline text-dark">
+                            <img src="/name2.png" alt="book logo" className={styles.logo}/>
+                        </span>
+                    </a>
                 </div>
+                <div className={`${styles.loginContainer} rounded-0`}>
+                    <form>
+                        {/* <h4 className="text-center">Login</h4> */}
+                        <div className="form-group p-2">
+                            <label className="form-label">Username*</label>
+                            <input type="text" className={nameError?`${styles.fieldBorderColor} form-control`:"form-control"} value={login.username} name="username" onChange={handleChange} onBlur={handleName}/>
+                            {nameError && <div className={styles.errorFormField}>
+                                {nameError}
+                            </div>}
+                        </div>
+                            
+                        <div className="form-group p-2">
+                            <label className="form-label">Password* </label>
+                            <input type={showPassword?"password":"text"} className={ passwordError ? `${styles.fieldBorderColor} form-control`:"form-control"} name="password" value={login.password} onChange={handleChange} onBlur={handlePassword}/>
+                            <i className={`bi bi-eye-fill ${styles.eyeFill}`} onClick = {showHidePassword}></i>
+                            {passwordError && <div className={styles.errorFormField}>
+                                {passwordError}
+                            </div>}
+                        </div>
+                        {/* <br/> */}
+                        
+                        {apiErr && <div className={styles.errorFormField}>{apiErr}</div>}
 
-                
-                {apiErr && <div className={styles.errorFormField}>{apiErr}</div>}
-
-                <div className="row p-3 justify-content-center">
-                    <button className={`btn text-white ${styles.loginBtn} rounded-0`} type="submit" onClick={handleSubmit}>LOGIN</button>
+                        <div className="row p-4 justify-content-center">
+                            <button className={`btn text-white ${styles.loginBtn} rounded-0`} type="submit" onClick={handleSubmit}>LOGIN</button>
+                        </div>
+                    </form>
+                    {successMessage && <div className={`${styles.successMsg}`}><i className="bi bi-check-circle-fill text-success"></i> &nbsp;{successMessage} </div>}
+                    {failuremsg && <div className={`${styles.failureMsg}`}><i className="bi bi-x-circle-fill text-danger"></i> &nbsp;{failuremsg} </div>}
                 </div>
-            </form>
-            {successMessage && <div className={`${styles.successMsg}`}><i className="bi bi-check-circle-fill text-success"></i> &nbsp;{successMessage} </div>}
-            {failuremsg && <div className={`${styles.failureMsg}`}><i className="bi bi-x-circle-fill text-danger"></i> &nbsp;{failuremsg} </div>}
+            </div>
         </div>
         </>
     )

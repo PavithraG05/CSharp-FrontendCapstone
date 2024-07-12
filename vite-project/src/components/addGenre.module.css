@@ -8,7 +8,7 @@
 }
 
 .font{
-    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     /* width: 500px !important; */
 }
 
@@ -30,7 +30,12 @@
     text-align: center;
 }
 
-/* .btnColor{
-    /* background-color:black !important; */
-    /* outline: 1px solid black; */
-/* } */ 
+.btnColor{
+    background-color: #4e65b3 !important;
+    color: white !important
+} 
+
+.modalHeading{
+    font-size: 20px;
+    font-weight: 500;
+}

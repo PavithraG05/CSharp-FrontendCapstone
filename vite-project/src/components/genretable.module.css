@@ -9,3 +9,31 @@
 .mousehover{
     cursor: pointer;
 }
+
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    /* text-align: left; */
+}
+
+.genreCol1{
+    width: 5%;
+}
+
+.genreCol2{
+    width: 15%;
+    /* text-align: center !important; */
+}
+
+.genreCol3{
+    width: 15%;
+}
+
+.genreCol4{
+    width: 55%;
+}
+
+.genreCol5{
+    width: 5%;
+}
+

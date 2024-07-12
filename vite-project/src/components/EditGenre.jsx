@@ -106,7 +106,7 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
             {console.log(`${JSON.stringify(editGenreForm)}`)}
             <Modal show={editModal} onHide={handleClose} centered className={`${styles.font} modal-md`}>
                 <Modal.Header closeButton>
-                    <Modal.Title>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Genre</Modal.Title>
+                    <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Genre</span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -123,7 +123,7 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                    <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

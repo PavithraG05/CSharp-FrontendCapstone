@@ -1,7 +1,7 @@
 .biPencilSquare, .biTrash, .biInfo{
     /* padding-left: 17px; */
     font-size: 1.1rem;
-    color: #38383a !important;
+    color: black!important;
     cursor: pointer;
 }
 
@@ -46,4 +46,9 @@ mark{
 .tableRows th,td{
     /* background-color: rgb(245, 242, 242) !important; */
     background-color: #ffffff !important;
+}
+
+.bookImg{
+    height:50px;
+    width:100px;
 }

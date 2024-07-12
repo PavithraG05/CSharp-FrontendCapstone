@@ -1,6 +1,6 @@
 .biPencilSquare, .biTrash, .biInfo{
     /* padding-left: 17px; */
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: black;
     cursor: pointer;
 }

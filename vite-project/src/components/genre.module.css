@@ -38,19 +38,29 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    /* padding-bottom: 20px !important; */
 }
 
 .expanded{
     max-width: 670px;
     /* padding: 10px !important; */
-    /* max-height: 50px; */
-    padding-bottom: 20px !important;
+    /* max-height: 100px; */
+    /* padding: 100px !important; */
 }
+
+/* .expanded span{
+    padding: 40px !important;
+} */
 
 mark{
     background-color: rgba(255, 166, 0, 0.627) !important;
 }
 
 .genreBooks{
-    padding-bottom: 1em !important;
+    padding-bottom: 7em !important;
+}
+
+.genreCol{
+    /* text-align:start; */
+    /* padding-left: 100px; */
 }

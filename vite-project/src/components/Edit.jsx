@@ -174,7 +174,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
             {editBookForm && 
             <Modal show={editModal} onHide={handleClose} centered className={`${styles.font} modal-lg`}>
             <Modal.Header closeButton>
-                <Modal.Title>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Book</Modal.Title>
+                <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Book</span></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -257,7 +257,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                     Save Changes
                 </Button>
             </Modal.Footer>

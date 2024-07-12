@@ -126,7 +126,7 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
         <>
         <Modal show={addModalShow} onHide={handleClose} centered className={`${styles.font} modal-lg`}>
             <Modal.Header closeButton>
-                <Modal.Title>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Book</Modal.Title>
+                <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Book</span></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -208,7 +208,7 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                     Add Book
                 </Button>
             </Modal.Footer>

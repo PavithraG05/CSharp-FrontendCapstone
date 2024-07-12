@@ -92,7 +92,7 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
             {console.log(`${JSON.stringify(editAuthorForm)}`)}
             <Modal show={editAuthorModal} onHide={handleClose} centered className={`${styles.font} modal-lg`}>
                 <Modal.Header closeButton>
-                    <Modal.Title>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Author</Modal.Title>
+                    <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Author</span></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -121,7 +121,7 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                    <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

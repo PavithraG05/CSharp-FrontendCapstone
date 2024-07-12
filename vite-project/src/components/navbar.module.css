@@ -3,9 +3,8 @@
     /* height: 55px; */
     /* background-color: darkblue !important; */
     color: black !important;
-    /* background-color: #20358d; */
-    /* background-color: #27439c; */
-    background-color: #3a4c86;
+    /* background-color: #4f65b3; */
+    background-color: #4a4bcc;
 }
 
 /* .navbarBrand{
@@ -20,8 +19,8 @@
 }
 
 .navlinks{
-    font-size:21px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:19.5px;
+    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 5px 28px 5px 28px;
     /* background-color: #5d5eff; */
 }
@@ -31,7 +30,7 @@
 }
 
 .navlinkfirst{
-    margin-top: 30px;
+    margin-top: 28px;
 }
 
 .navLinkColor:hover{
@@ -41,7 +40,7 @@
 }
 
 .logoImg{
-    width: 40px !important;
+    width: 35px !important;
     height: 30px !important;
     padding-top: 0px;
     margin-top: 17px !important;

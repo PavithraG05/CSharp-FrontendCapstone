@@ -56,7 +56,7 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
                 {expandIndex && <td className={`${styles.expanded} ${styles.justify}`} onClick={()=>expandCell()}>{author.biography}</td>}
                 <td className="text-center"><i className={`bi bi-pencil-square ${styles.biPencilSquare}`} onClick={()=>handleEdit()}></i></td>
                 <td className="text-center"><i className={`bi bi-trash ${styles.biTrash}`} onClick={()=>handleDelete()}></i></td>   
-                <td className="text-center"><i className={`bi ${styles.biInfo} ${index === activeAuthorIndex?`${styles.squareFill} bi-caret-down-square-fill`:"bi-caret-down-square"}`} onClick={()=>toggleAccordion(index)}></i></td>
+                <td className="text-center"><i className={`bi ${styles.biInfo} ${index === activeAuthorIndex?`${styles.squareFill} bi-caret-up`:"bi-caret-down-fill"}`} onClick={()=>toggleAccordion(index)}></i></td>
             </tr>
             {index === activeAuthorIndex && 
                 (

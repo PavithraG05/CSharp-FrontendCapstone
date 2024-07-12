@@ -90,7 +90,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
         <>
         <Modal show={addAuthorModalShow} onHide={handleClose} centered className={`${styles.font} modal-lg`}>
             <Modal.Header closeButton>
-                <Modal.Title>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Author</Modal.Title>
+                <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-plus-square"></i>&nbsp; &nbsp;Add Author</span></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -120,7 +120,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button className={`btn-dark ${styles.btnColor}`} onClick={handleSubmit}>
+                <Button className={`btn ${styles.btnColor}`} onClick={handleSubmit}>
                     Add Author
                 </Button>
             </Modal.Footer>

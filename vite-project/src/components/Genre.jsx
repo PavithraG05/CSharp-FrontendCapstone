@@ -36,11 +36,11 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
                 console.log(oneGenre)
             }
 
-            <tr className={index === activeIndex ? 'table-active' : ''}>
+            <tr className={`${index === activeIndex ? 'table-active' : ''}`}>
                 <th scope="align-middle row">{index}</th>
                 {searchInput && <td className="text-capitalize">{highlightTask(genre.genre_name, searchInput)}</td>}
                 {!searchInput && <td className="text-capitalize">{genre.genre_name}</td>}
-                <td>{genre.Books.length}</td>
+                <td className={`${styles.genreCol}`}>{genre.Books.length}</td>
                 {!expandIndex && <td className={`${styles.truncate} align-middle`} onClick={()=>expandCell()}>
                     {genre.Books.map((book,index) => {
                                         return(
@@ -56,7 +56,7 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
                     {genre.Books.map((book,index) => {
                                         return(
                                             <>
-                                                <span className={styles.genreBooks}>{book.title} - {book.Author.name} </span><br/>
+                                                {index+1}. &nbsp;<span className={styles.genreBooks}>{book.title} - {book.Author.name} </span><br/>
                                             </>
                                         )
                                     })}

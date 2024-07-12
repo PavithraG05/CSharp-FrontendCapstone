@@ -13,6 +13,7 @@ const BookTable = ({books, setBooks, displayedItems, searchInput, searchBookList
             const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchInput.toLowerCase()));
             console.log(`filter: ${JSON.stringify(filteredBooks)}`)
             setSearchBookList(filteredBooks)
+            // setBookFunc(filteredBooks)
             console.log(`filter: ${filteredBooks.length}`)
         }
         filterSearchList(searchInput);
@@ -38,19 +39,19 @@ const BookTable = ({books, setBooks, displayedItems, searchInput, searchBookList
     console.log(`in Table ${JSON.stringify(searchBookList)} ${searchBookList.length}`)
     return(
         
-        <div className={`table-responsive ${styles.tableResponsive} `}>
+        <div className={`table-responsive ${styles.tableResponsive}`}>
             <table className={`table table-hover ${styles.tableRow} `}>
                 <thead>
                     <tr className={styles.rowColor}>
-                        <th scope="col">#</th>
-                        <th scope="col">Book Title&nbsp;<i className={`fa ${(sortField==='title'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('title')}></i></th>
-                        <th scope="col">Publication Date&nbsp;<i className={`fa ${(sortField==='publication_date'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('publication_date')}></i></th>
-                        <th scope="col">Price&nbsp;<i className={`fa ${(sortField==='price'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('price')}></i></th>
-                        <th scope="col">Author&nbsp;<i className={`fa ${(sortField==='author'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('author')}></i></th>
-                        <th scope="col">Genre&nbsp;<i className={`fa ${(sortField==='genre'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('genre')}></i></th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">View</th>
+                        <th scope="col" className={styles.col1}>#</th>
+                        <th scope="col" className={styles.col2}>Book Title&nbsp;<i className={`fa ${(sortField==='title'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('title')}></i></th>
+                        <th scope="col" className={styles.col3}>Publication Date&nbsp;<i className={`fa ${(sortField==='publication_date'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('publication_date')}></i></th>
+                        <th scope="col" className={styles.col4}>Price&nbsp;<i className={`fa ${(sortField==='price'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('price')}></i></th>
+                        <th scope="col" className={styles.col5}>Author&nbsp;<i className={`fa ${(sortField==='author'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('author')}></i></th>
+                        <th scope="col" className={styles.col6}>Genre&nbsp;<i className={`fa ${(sortField==='genre'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('genre')}></i></th>
+                        <th scope="col" className={styles.col7}>Edit</th>
+                        <th scope="col" className={styles.col8}>Delete</th>
+                        <th scope="col" className={styles.col9}>View</th>
                     </tr>
                 </thead>
                 <tbody>

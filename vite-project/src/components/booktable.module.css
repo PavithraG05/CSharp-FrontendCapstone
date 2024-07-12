@@ -1,6 +1,8 @@
 .tableResponsive {
     max-height:690px;
     /* border-radius: 20px !important; */
+    /* border: 1px solid #4e65b3; */
+    /* background-color: #4e65b3; */
 }
 
 .tableResponsive thead th { 
@@ -15,8 +17,41 @@
     /* color: white !important; */
 }
 
-.rowColor th{
-    /* background-color: rgb(201, 227, 250) !important; */
-    /* background-color: #5771ca !important; */
-    /* color: white !important; */
+/* .rowColor th{
+    background-color: rgb(201, 227, 250) !important;
+    background-color: #5771ca !important;
+    color: white !important;
+} */
+
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    /* text-align: left; */
+}
+.col1{
+    width:5%;
+}
+.col2{
+    width:25%;
+}
+.col3{
+    width:15%;
+}
+.col4{
+    width:10%;
+}
+.col5{
+    width:15%;
+}
+.col6{
+    width:13%;
+}
+.col7{
+    width:5%;
+}
+.col8{
+    width:6%;
+}
+.col9{
+    width:5%;
 }

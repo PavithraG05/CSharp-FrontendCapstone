@@ -1,0 +1,42 @@
+.navbarHeader{
+    /* background-color: navy; */ 
+    height: 55px;
+    background-color: #5d5eff !important;
+}
+
+.navbarBrand img{
+    width:140px;
+    height:30px;
+    margin-left: 30px;
+}
+
+.headerNav a{
+    font-size:21px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #5d5eff;
+}
+
+/* .navTextColor{
+    color:white !important;
+} */
+
+.personCircle, .houseFill{
+    color: white;
+    font-size: 1.4rem;
+    
+}
+
+.todoHeaderDropdown{
+    padding: 0 !important;
+}
+
+.todoHeaderDropdownList{
+    background-color: #5d5eff !important;
+}
+
+.todoHeaderDropdownList:hover{
+    opacity: 0.9 !important;
+    background-color: #5d5eff !important;
+    color: white !important;
+    font-size: 22px;
+}

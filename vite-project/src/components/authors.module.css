@@ -1,7 +1,8 @@
 .addAuthorBtnClass{
-    width:37%;
+    width:100%;
     float: right !important;
-    background-color: gainsboro !important;
+    background-color: #4e65b3 !important;
+    color: white !important
     /* margin-right:0px !important; */
 }
 
@@ -19,23 +20,38 @@
 }
 
 .searchSize{
-    /* height: 5px !important; */
-    width:350px !important;
-    /* width:545px !important; */
-    font-size: 16px !important;
+    height: 39px !important;
+    float: right !important;
+    /* width:450px !important; */
+    width:300px !important;
+    font-size: 13px !important;
+    border-bottom: 1px solid rgb(83, 82, 82) !important;
+    /* border-left: 1px solid rgb(83, 82, 82) !important; */
+    /* border-bottom: 1.7px solid #617ee0 !important; */
+    /* color: #617ee0 !important; */
 }
 
 .searchBar, .searchLabel{
     /* border-color: gray !important; */
     border: none !important;
-    border-bottom: 1px solid gray !important;
+    /* border-bottom: 1px solid gray !important; */
     border-radius: 0 !important;
     box-shadow: none !important;
 }
 
+.searchLabel{
+    background: #fff !important;
+}
+
+.searchBar{
+    border-left: 0 !important;
+    padding: 6px 9px !important;
+    margin-left: -5px !important;
+}
+
 .searchBar:focus{
     border-width: 1.5px !important;
-    border-color: black !important;
+    /* border-color: black !important; */
     /* box-shadow: 0.1rem gray   !important; */
 }
 
@@ -60,6 +76,8 @@
     width: 28px;
     height:22px;
     padding-left:4px;
+    color: black !important;
+    border: 1.7px solid black !important;
 }
 
 .alignEntry{
@@ -67,10 +85,11 @@
 }
 
 .entryText{
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500 !important;
     padding-left: 3px;
+    color: black !important;
 }
-
 .content{
     /* margin-top: 17px !important; */
     margin:0px 30px 0px 30px!important;

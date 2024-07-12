@@ -56,11 +56,12 @@ const DeleteAuthor = ({deleteAuthorModalShow, setDeleteAuthorModalShow, oneAutho
             {deleteErr && <span className={`${styles.errorFormField}`}><br/>{deleteErr}</span>}
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="dark" onClick={handleSubmit}>
-                Yes
-            </Button>
+            
             <Button variant="secondary" onClick={handleClose}>
                 No
+            </Button>
+            <Button className={styles.btnColor} onClick={handleSubmit}>
+                Yes
             </Button>
             </Modal.Footer>
         </Modal>

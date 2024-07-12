@@ -146,17 +146,21 @@ const Authors = ({loginSuccessState, setLoginSuccessState}) => {
                 <div className={`col py-3 ${styles.content}`}>
 
                     <div className = "row">
-                        <div className ="col-4">
+                        <div className ="col-6 p-2">
                             <h5>Authors Summary</h5>
                         </div>
-                        <div className={`col-4 ${styles.searchContainer}`}>
-                            <div className={`input-group ${styles.searchSize} mb-3`}>
-                            <span className={`input-group-text ${styles.searchLabel}`} id="basic-addon1"><i className="bi bi-search"></i></span>
-                            <input type="text" className={`form-control ${styles.searchBar}`} placeholder="Search based on author name" aria-label="search" value={authorSearchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                        <div className={`col-6`}>
+                            <div className="row">
+                                <div className={`col-8 ${styles.searchContainer}`}>
+                                    <div className={`input-group ${styles.searchSize} rounded-3 mb-3`}>
+                                        <span className={`input-group-text ${styles.searchLabel} rounded-3`} id="basic-addon1"><i className="bi bi-search"></i></span>
+                                        <input type="text" className={`form-control ${styles.searchBar} rounded-3`} placeholder="Search based on author name" aria-label="search" value={authorSearchInput} aria-describedby="basic-addon1" onChange={handleSearch}/>
+                                    </div>
+                                </div>
+                                <div className="col-4">
+                                    <button className={`btn ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square ${styles.plusIcon}`}></i>Add Authors</button>
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-4">
-                            <button className={`btn fw-bold ${styles.addAuthorBtnClass} rounded-1`} type="button" onClick={()=>addAuthor()}><i className={`bi bi-plus-square-fill ${styles.plusIcon}`}></i>Add Authors</button>
                         </div>
                     </div>
                     <div className={`row ${styles.spaceAbv} bg-light`}>

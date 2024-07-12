@@ -7,9 +7,15 @@
     overflow: auto; 
 }
 
+.modalHeading{
+    font-size: 21px;
+    font-weight: 500;
+}
+
 .font{
-    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     /* width: 500px !important; */
+    /* font-size:16px; */
 }
 
 /* .customSelectScrollable {
@@ -30,7 +36,7 @@
     text-align: center;
 }
 
-/* .btnColor{
-    /* background-color:black !important; */
-    /* outline: 1px solid black; */
-/* } */ 
+.btnColor{
+    background-color: #4e65b3 !important;
+    color: white !important
+} 
