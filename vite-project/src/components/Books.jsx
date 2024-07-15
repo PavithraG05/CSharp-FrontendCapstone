@@ -20,7 +20,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
-    let itemsPerPage = 20;
+    let itemsPerPage = 15;
     // const [bookFunc, setBookFunc] = useState([]);
     // const [entry, setEntry] = useState(15);
 
@@ -240,7 +240,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
         <>
          <div className="container-fluid">
             <div className="row flex-nowrap">
-                <NavBar setLoginSuccessState={setLoginSuccessState}/>
+                <NavBar setLoginSuccessState={setLoginSuccessState} active="books"/>
                 
                 <div className={`col py-3 ${styles.content}`}>
                     <div className = "row">
@@ -268,7 +268,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                     {/* <hr/> */}
                     </div>
                     
-                    <div className={`row ${styles.spaceAbv} rounded-2 `}>
+                    <div className={`row ${styles.spaceAbv} bg-light rounded-2 `}>
                         <div className="col-2">
                         {/* <div><i class="fa fa-download"></i> &nbsp;Download</div> */}
                             <div className={styles.alignEntry}>

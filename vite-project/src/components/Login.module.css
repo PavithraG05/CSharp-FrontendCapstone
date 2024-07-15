@@ -1,7 +1,7 @@
 .loginContainer {
     max-width: 400px;
     max-height: 850px;
-    margin: 70px auto;
+    margin: 40px auto;
     margin-bottom: 0px;
     padding: 0px;
     border-radius: 5px;
@@ -56,7 +56,7 @@
 .loginimg{
     height: 100%;
     width: 110%;
-    opacity: 0.9;
+    /* opacity: 0.9; */
 }
 
 .imgContainer{
@@ -79,4 +79,25 @@
     
     height: 50px; 
     width: 250px;
+}
+
+.arrow{
+    /* float:right; */
+    /* padding: 8px 10px; */
+    /* padding-top: 15px  !important; */
+    font-size: 1.1rem;
+}
+
+.arrowDiv{
+    /* float: right; */
+    padding-left: 180px;
+    padding-top: 120px;
+    /* padding-right: 120px !important; */
+}
+
+.homeBtn{
+    /* margin-top: 140px; */
+    margin-right:40px;
+    float:right;
+    margin-top: 20px;
 }

@@ -141,7 +141,7 @@ const Authors = ({loginSuccessState, setLoginSuccessState}) => {
         <>
         <div className="container-fluid">
             <div className="row flex-nowrap">
-                <NavBar setLoginSuccessState={setLoginSuccessState}/>
+                <NavBar setLoginSuccessState={setLoginSuccessState} active="authors"/>
                 
                 <div className={`col py-3 ${styles.content}`}>
 

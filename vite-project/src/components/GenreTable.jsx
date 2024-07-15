@@ -46,7 +46,7 @@ const GenreTable = ({genres, setGenres, displayedItems, searchInput, searchGenre
                     <tr>
                         <th scope="col" className={styles.genreCol1}>#</th>
                         <th scope="col" className={styles.genreCol2}>Genre Name&nbsp;<i className={`fa ${(sortField==='genre_name'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('genre_name')}></i></th>
-                        <th scope="col" className={styles.genreCol3}>Genre-Books&nbsp;<i className={`fa ${(sortField==='count'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('count')}></i></th>
+                        <th scope="col" className={styles.genreCol3}>Books in Genre&nbsp;<i className={`fa ${(sortField==='count'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('count')}></i></th>
                         <th scope="col" className={styles.genreCol4}>Genre - Book List</th>
                         <th scope="col" className={styles.genreCol5}>Edit</th>
                     </tr>

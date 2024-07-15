@@ -7,7 +7,7 @@ import PageNotFound from "./PageNotFound"
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import styles from './navbar.module.css'
 
-const NavBar = ({setLoginSuccessState}) => {
+const NavBar = ({setLoginSuccessState, active}) => {
 
     // function handleClick(){
     //     setLoginSuccessState(true)
@@ -17,7 +17,7 @@ const NavBar = ({setLoginSuccessState}) => {
         
         <div className={`col-auto col-md-3 col-xl-2 px-sm-2 px-0 ${styles.navbarHeader}`}>
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
-                <a href="/books" className={`d-flex align-items-center pb-0 mb-md-0 me-md-auto ${styles.navbarBrand}`}>
+                <a href="/" className={`d-flex align-items-center pb-0 mb-md-0 me-md-auto ${styles.navbarBrand}`}>
                     <img src="/book_logo.png" className={styles.logoImg}/>
                     <span className="d-none d-sm-inline text-dark">
                         <img src="/name.png" alt="book logo"/>
@@ -32,15 +32,15 @@ const NavBar = ({setLoginSuccessState}) => {
                         </a>
                     </li> */}
                     <li className={`nav-item ${styles.navlinks}`}>
-                        <a href="/books" className={`nav-link px-0 align-middle ${styles.navLinkColor} ${styles.navlinkfirst}`}>
+                        <a href="/books" className={`${active === "books" ? `${styles.linkActive}` : ""} nav-link align-middle ${styles.navLinkColor} ${styles.navlinkfirst}`}>
                         <i class="fs-4 bi-journal-text"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Books</span> </a>
                     </li>
                     <li className={`nav-item ${styles.navlinks}`}>
-                        <a href="/authors" className={`nav-link px-0 align-middle ${styles.navLinkColor}`}>
+                        <a href="/authors" className={`${active === "authors" ? `${styles.linkActive}` : ""} nav-link align-middle ${styles.navLinkColor}`}>
                             <i class="fs-4 bi bi-person-lines-fill"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Authors</span></a>
                     </li>
                     <li className={`nav-item ${styles.navlinks}`}>
-                        <a href="/genres" className={`nav-link px-0 align-middle ${styles.navLinkColor}`}>
+                        <a href="/genres" className={`${active === "genres" ? `${styles.linkActive}` : ""} nav-link align-middle ${styles.navLinkColor}`}>
                             <i class="fs-4 bi bi-list-stars"></i> <span className={`ms-1 d-none d-sm-inline`}>&nbsp;Genres</span></a>
                     </li>
                     

@@ -6,6 +6,7 @@ import Books from "./components/Books";
 import Genres from "./components/Genres";
 import Authors from "./components/Authors";
 import PageNotFound from "./components/PageNotFound";
+import Home from "./components/Home";
 
 function App() {
   const [loginSuccessState, setLoginSuccessState] = useState(true);
@@ -15,6 +16,7 @@ function App() {
       {/* <NavBar/> */}
       <BrowserRouter>
           <Routes>
+            <Route path="/" element ={<Home/>}/>
             <Route path="/login" element ={<Login setLoginSuccessState={setLoginSuccessState}/>}/>
             <Route path="/books" element ={<Books loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState}/>}/>
             <Route path="/authors" element ={<Authors loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState}/>}/>

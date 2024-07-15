@@ -106,12 +106,15 @@ const Login = ({setLoginSuccessState}) => {
         <>
         {/* <LoginNav/> */}
         <div className="row">
+
             <div className = "col-6">
                 <div className={styles.imgContainer}>
-                    <img src="./bookshelf-1.jpg" className={styles.loginimg}/>
+                    <img src="./boook5.jpg" className={styles.loginimg}/>
                 </div>
             </div>
             <div className="col-6">
+            <a href="/" className={`btn btn-light fw-bold ${styles.homeBtn}`}><i className={`bi bi-arrow-left-circle ${styles.arrow}`}></i>&nbsp;&nbsp;Home</a>
+
                 <div>
                     <a href="/login" className={`d-flex align-items-center pb-0 mb-md-0 me-md-auto ${styles.navbarBrand}`}>
                         <img src="/book_logo.png" className={styles.logoImg}/>

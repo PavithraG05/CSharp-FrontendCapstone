@@ -3,8 +3,8 @@
     /* height: 55px; */
     /* background-color: darkblue !important; */
     color: black !important;
-    /* background-color: #4f65b3; */
-    background-color: #4a4bcc;
+    background-color: #383899;
+    /* background-color: #4a4bcc; */
 }
 
 /* .navbarBrand{
@@ -21,7 +21,8 @@
 .navlinks{
     font-size:19.5px;
     font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 5px 28px 5px 28px;
+    padding: 5px 22px 5px 22px !important;
+
     /* background-color: #5d5eff; */
 }
 
@@ -44,6 +45,15 @@
     height: 30px !important;
     padding-top: 0px;
     margin-top: 17px !important;
+}
+
+.linkActive{
+    border-left: 3px solid white !important;
+    border-radius: 0px !important;
+    background-color: rgba(243, 247, 250, 0.309) !important;
+    /* opacity: 0.8; */
+    /* padding: 1px 20px !important; */
+    font-weight: 900 !important;
 }
 
 /* .navTextColor{

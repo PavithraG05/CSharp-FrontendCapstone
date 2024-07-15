@@ -44,6 +44,10 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
         init();
     },[addGenreModalShow])
 
+    useEffect(()=>{
+
+    },[!searchInput])
+
     // console.log()
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -116,14 +120,14 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
         let totalPages = 0;
         let length;
         if(!searchInput){
-            const length = genres.length;
+            length = genres.length;
             if(genres.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + genres.slice(startIndex, endIndex).length;
             }
             totalPages = Math.ceil(genres.length / itemsPerPage)
         }
         else{
-            const length = searchGenreList.length;
+            length = searchGenreList.length;
             if(searchGenreList.slice(startIndex, endIndex).length !== itemsPerPage){
                 endIndex = startIndex + searchGenreList.slice(startIndex, endIndex).length;
             }
@@ -148,7 +152,7 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
         <>
         <div className="container-fluid">
             <div className="row flex-nowrap">
-                <NavBar setLoginSuccessState = {setLoginSuccessState}/>
+                <NavBar setLoginSuccessState = {setLoginSuccessState} active="genres"/>
                 
                 <div className={`col py-3 ${styles.content}`}>
                     <div className = "row">
