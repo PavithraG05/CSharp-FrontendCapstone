@@ -146,7 +146,7 @@ const Login = ({setLoginSuccessState}) => {
                         
                         {apiErr && <div className={styles.errorFormField}>{apiErr}</div>}
 
-                        <div className="row p-4 justify-content-center">
+                        <div className={`row p-4 justify-content-center ${styles.padingtop}`}>
                             <button className={`btn text-white ${styles.loginBtn} rounded-0`} type="submit" onClick={handleSubmit}>LOGIN</button>
                         </div>
                     </form>

@@ -65,6 +65,7 @@ const DeleteAuthor = ({deleteAuthorModalShow, setDeleteAuthorModalShow, oneAutho
             </Button>
             </Modal.Footer>
         </Modal>
+        
         </>
     )
 }

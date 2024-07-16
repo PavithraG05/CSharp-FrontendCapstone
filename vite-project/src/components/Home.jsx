@@ -23,7 +23,7 @@ const Home = () => {
                 </div> 
             </div>
         </nav>
-        <div className={`col-lg-12 ${styles.homeBlockquote}`}>
+        <div className={`col-lg-12 ${styles.homeBlockquote} bg-light`}>
             {/* <img src="" className={styles.bannerImg}/> */}
             <div className="row">
                 {/* <a href="/login" className={`d-flex align-items-center pb-0 mb-md-0 me-md-auto ${styles.navbarBrand}`}>
@@ -35,6 +35,7 @@ const Home = () => {
             </div>
             <br/>
             <blockquote className="blockquote">
+                {/* <p className={styles.homeBlockquoteText}>Welcome to BookHaven</p>    */}
                 <p className={styles.homeBlockquoteText}>One stop place to effectively manage the books available in book store.</p>   
                 <a className={`btn ${styles.homeBtn}`} href="/login" type="button">Get Started for a Demo&nbsp;<i className="bi bi-arrow-right-circle-fill"></i></a> 
             </blockquote>

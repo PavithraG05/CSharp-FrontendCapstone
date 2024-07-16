@@ -18,6 +18,8 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
 
+    // const [filterSort, setFilterSort] = useState([]);
+
     useEffect(()=>{
         async function init(){
             try{
@@ -45,8 +47,8 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     },[addGenreModalShow])
 
     useEffect(()=>{
-
-    },[!searchInput])
+        
+    })
 
     // console.log()
     const handlePageChange = (page) => {
@@ -54,30 +56,36 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     };
 
     function sortAescGenre(){
+        // const sortlist = (searchInput && (sort === 1 || sort === 2))? filterSort : genres;
         if(sortField === 'genre_name'){
             const sorted = genres.slice().sort((a,b)=>{
                 return a.genre_name.localeCompare(b.genre_name);
             });
+            // setFilterSort(sorted);
             return sorted;
         }
         else if(sortField === 'count'){
             const sorted = genres.slice().sort((a,b)=>{
                 return Number(a.Books.length)- Number(b.Books.length);
             });
+            // setFilterSort(sorted);
             return sorted;
         }
     }
 
     function sortDescGenre(){
+        // const sortlist = (searchInput && (sort === 1 || sort === 2))? filterSort : genres;
         if(sortField === 'genre_name'){
             const sorted = genres.slice().sort((a,b)=>{
                 return b.genre_name.localeCompare(a.genre_name);
             });
+            // setFilterSort(sorted);
             return sorted;
         }else if(sortField === 'count'){
             const sorted = genres.slice().sort((a,b)=>{
                 return Number(b.Books.length)- Number(a.Books.length);
             });
+            // setFilterSort(sorted);
             return sorted;
         }
     }
@@ -85,28 +93,38 @@ const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     const getDisplayedItems = () => {
         let startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        if(!searchInput){
+        let sortedGenre = [];
+        if(!searchInput && (sort===0 || sort===1 || sort ===2)){
+            // setFilterSort(sortedGenre);
             if(sort === 1){
                 console.log(`${sortField}`);
-                let sortedGenre = sortAescGenre(sortField)
+                sortedGenre = sortAescGenre(sortField)
+                
                 let genresList = sortedGenre.slice(startIndex, endIndex)
                 return {genresList,startIndex};
             }
             else if(sort === 2){
                 console.log(`${sortField}`);
-                let sortedGenre = sortDescGenre(sortField)
+                sortedGenre = sortDescGenre(sortField)
                 let genresList = sortedGenre.slice(startIndex, endIndex)
                 return {genresList,startIndex};
             }
             else{
                 let genresList = genres.slice(startIndex, endIndex)
+                // setSort(0)
+                console.log(sort);
                 return {genresList,startIndex};
             }
             
         }
-        else{
+        else if(searchInput && ( sort !==1 && sort !==2)){
             // console.log(searchBookList.slice(startIndex, endIndex));
             let genresList = searchGenreList.slice(startIndex, endIndex)
+            // startIndex = startIndex + 1;
+            return {genresList, startIndex};
+        }
+        else if(searchInput && (sort === 1 || sort === 2)){
+            let genresList = filterSort.slice(startIndex, endIndex)
             // startIndex = startIndex + 1;
             return {genresList, startIndex};
         }
