@@ -12,8 +12,8 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
     const [editFormErr, setEditFormErr] = useState("");
 
     const editData = {
-        id: oneAuthor.id,
-        name: oneAuthor.name,
+        id: oneAuthor.author_Id,
+        name: oneAuthor.author_Name,
         biography: oneAuthor.biography
     }
     useEffect(()=>{
@@ -41,27 +41,31 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
 
     function updateAuthor(){
         console.log("updating")
-        
+        let token1 = localStorage.getItem("authToken");
             // setEditFormErr("");
-        fetch(`http://localhost:3000/api/authors/${editAuthorForm.id}`,{
+        fetch(`https://localhost:7226/api/v1/authors/${editAuthorForm.id}`,{
             method:"PUT",
-            headers:{"content-type":"application/json"},
+            headers:{Authorization:`Bearer ${token1}`,"content-type":"application/json"},
             body: JSON.stringify({
-                name:editAuthorForm.name,
+                author_name:editAuthorForm.name,
                 biography:editAuthorForm.biography
             })
             })
-            .then(response => response.json())
-            .then (json => {
+            .then(response => {
+                if(!response.ok) throw new Error(response.status)
+                else {
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');
-                const updated_author = authors.map((author) => author.id === editAuthorForm.id ? 
-                                        {...author,name:editAuthorForm.name,
-                                        biography:editAuthorForm.biography
-                                        }:author)
-                setAuthors(updated_author);
-                setEditAuthorModal(false);
-                setEditFormErr("");
+                    console.log("json");
+                    const updated_author = authors.map((author) => author.author_Id === editAuthorForm.id ? 
+                                            {...author,author_Name:editAuthorForm.name,
+                                            biography:editAuthorForm.biography
+                                            }:author)
+                    console.log(updated_author);
+                    setAuthors(updated_author);
+                    setEditAuthorModal(false);
+                    setEditFormErr("");
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -89,7 +93,7 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
     }
     return(
         <>
-            {console.log(`${JSON.stringify(editAuthorForm)}`)}
+            {/* {console.log(`${JSON.stringify(editAuthorForm)}`)} */}
             <Modal show={editAuthorModal} onHide={handleClose} centered className={`${styles.font} modal-lg`}>
                 <Modal.Header closeButton>
                     <Modal.Title><span className={styles.modalHeading}>&nbsp;<i class="bi bi-pencil-square"></i>&nbsp; &nbsp;Edit Author</span></Modal.Title>

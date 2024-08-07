@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import LoginNav from './LoginNav';
 
-const Login = ({setLoginSuccessState}) => {
+const Login = ({setLoginSuccessState,setToken,token}) => {
 
     const loginData = {
         username:"",
@@ -19,7 +19,6 @@ const Login = ({setLoginSuccessState}) => {
     const [failuremsg, setFailuremsg] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showPassword, setShowPassword] = useState(true);
-    
 
     // useEffect(()=>{
     //     setLogin(loginData);
@@ -61,19 +60,25 @@ const Login = ({setLoginSuccessState}) => {
 
     function validateLogin(){
         console.log(login);
-        fetch('http://localhost:3000/api/users',
+        fetch('https://localhost:7226/api/v1/authentication/authenticate',
             {
                 method: "POST",
                 headers:{"content-type":"application/json"},
                 body: JSON.stringify(login)
             }
         )
-        .then((response) => response.json())
+        .then((response) => {
+            if(!response.ok) throw new Error(response.status);
+            else return response.text();
+        })
         .then(data => {
             // alert("Todo added successfully");
-            console.log(JSON.stringify(data));
+            console.log(data);
             if(data){
                 console.log("Login success");
+                setToken(data);
+                localStorage.setItem('authToken', data);
+                console.log(token);
                 setLoginSuccessState(true);
                 navigate('/books');
             }else{
@@ -83,8 +88,11 @@ const Login = ({setLoginSuccessState}) => {
             }
         })
         .catch((error) => {
-            console.log(error);
-            setApiError("Error adding details to API");
+            console.log("Login failed");
+            setLoginSuccessState(false);
+            localStorage.setItem('authToken', null);
+            setFailuremsg("Incorrect Username or Password!")
+            //setApiError("Error adding details to API");
         });
     }
 

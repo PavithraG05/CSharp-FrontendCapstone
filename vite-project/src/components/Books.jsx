@@ -7,7 +7,7 @@ import useFetch from './useFetch';
 import ExcelDownload from './ExcelDownload';
 import NavBar from './NavBar';
 
-const Books = ({loginSuccessState, setLoginSuccessState}) => {
+const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
     
     const [addModalShow, setAddModalShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
@@ -25,12 +25,19 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
     // const [entry, setEntry] = useState(15);
 
     // itemsPerPage = entry;
+    //let token1 = token;
+    let token1 = localStorage.getItem("authToken");
 
     useEffect(()=>{
         async function init(){
             try{
+                console.log(token);
                 setBookError("");
-                const response = await fetch(`http://localhost:3000/api/books`);
+                const response = await fetch(`https://localhost:7226/api/v1/books`, {
+                    headers: {
+                      Authorization: `Bearer ${token1}`,
+                    },
+                  });
                 if(response.ok){
                     let json = await response.json();
                     // json = JSON.parse(json)
@@ -56,7 +63,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
 
     useEffect(()=>{
         function handleFilter(){
-            const filteredBooks =  books.filter(book => book.Genre.genre_name.toLowerCase() === selectedFilter.toLowerCase());
+            const filteredBooks =  books.filter(book => book.genre.genre_Name.toLowerCase() === selectedFilter.toLowerCase());
             console.log(`filter: ${JSON.stringify(filteredBooks)}`)
             setFilterBookList(filteredBooks)
             // setBookFunc(filteredBooks);
@@ -64,7 +71,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
         handleFilter();
     },[selectedFilter])
 
-    const {data: genresData, genresLoading, genresApiError} = useFetch("genres");
+    const {data: genresData, genresLoading, genresApiError} = useFetch("genres",token1);
     if (genresLoading) return "Loading...";
     if(genresApiError) setGenreError("Error fetching genres using API");
 
@@ -90,19 +97,19 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
         }
         else if(sortField === 'publication_date'){
             const sorted = books.slice().sort((a,b)=>{
-                return (new Date(a.publication_date) - new Date(b.publication_date));
+                return (new Date(a.publication_Date) - new Date(b.publication_Date));
             });
             return sorted;
         }
         else if(sortField === 'author'){
             const sorted = books.slice().sort((a,b)=>{
-                return a.Author.name.localeCompare(b.Author.name);
+                return a.author.author_Name.localeCompare(b.author.author_Name);
             });
             return sorted;
         }
         else if(sortField === 'genre'){
             const sorted = books.slice().sort((a,b)=>{
-                return a.Genre.genre_name.localeCompare(b.Genre.genre_name);
+                return a.genre.genre_Name.localeCompare(b.genre.genre_Name);
             });
             return sorted;
         }
@@ -123,19 +130,19 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
         }
         else if(sortField === 'publication_date'){
             const sorted = books.slice().sort((a,b)=>{
-                return new Date(b.publication_date) - new Date(a.publication_date);
+                return new Date(b.publication_Date) - new Date(a.publication_Date);
             });
             return sorted;
         }
         else if(sortField === 'author'){
             const sorted = books.slice().sort((a,b)=>{
-                return b.Author.name.localeCompare(a.Author.name);
+                return b.author.author_Name.localeCompare(a.author.author_Name);
             });
             return sorted;
         }
         else if(sortField === 'genre'){
             const sorted = books.slice().sort((a,b)=>{
-                return b.Genre.genre_name.localeCompare(a.Genre.genre_name);
+                return b.genre.genre_Name.localeCompare(a.genre.genre_Name);
             });
             return sorted;
         }
@@ -286,7 +293,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                                         <ul className={`dropdown-menu ${styles.filterBtn}`}>
                                                 {genresData && genresData.map(genre =>{
                                                     return(
-                                                    <li className={styles.dropdownList} onClick={()=>getFilterSelect(genre.genre_name)}>{genre.genre_name.charAt(0).toUpperCase() + genre.genre_name.slice(1)}</li>
+                                                    <li className={styles.dropdownList} onClick={()=>getFilterSelect(genre.genre_Name)}>{genre.genre_Name.charAt(0).toUpperCase() + genre.genre_Name.slice(1)}</li>
                                                 )})}
                                         </ul>
                                     </div>
@@ -304,7 +311,7 @@ const Books = ({loginSuccessState, setLoginSuccessState}) => {
                         <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField} filterBookList={filterBookList}/>
 
                     </div>
-                    <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
+                    {/* <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/> */}
                 </div>
             </div>
         </div>

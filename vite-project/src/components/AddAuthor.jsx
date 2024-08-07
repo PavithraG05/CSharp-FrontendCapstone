@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAuthors}) => {
     const author = {
-        name:"",
+        author_name:"",
         biography:"",
     }
 
@@ -19,6 +19,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     useEffect(()=>{
         setAddAuthor(author);
         setSuccessMessage("")
+        setApiError("");
         setNameError("")
         setbiographyError("")
     },[addAuthorModalShow])
@@ -28,10 +29,11 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     }
 
     function addAuthorDetails(){
-        fetch('http://localhost:3000/api/authors',
+        let token1 = localStorage.getItem("authToken");
+        fetch('https://localhost:7226/api/v1/authors',
             {
                 method: "POST",
-                headers:{"content-type":"application/json"},
+                headers:{ Authorization: `Bearer ${token1}`,"content-type":"application/json"},
                 body: JSON.stringify(addAuthor)
             }
         )
@@ -47,21 +49,21 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
         })
         .catch((error) => {
             console.log(error);
-            setApiError("Error adding details to API");
+            setApiError("Author with this name already exists");
         });
     }
 
     function handleSubmit(event){
         event.preventDefault();
         
-        if(addAuthor.name && addAuthor.biography){
+        if(addAuthor.author_name && addAuthor.biography){
             // console.log(addBook)
             addAuthorDetails()
-            setAddAuthor(author);
+            //setAddAuthor(author);
             
         }
         else{
-            !addAuthor.name ? setNameError("Author name should not be empty") : setNameError("");
+            !addAuthor.author_name ? setNameError("Author name should not be empty") : setNameError("");
             !addAuthor.biography ? setbiographyError("Biography should not be empty") : setbiographyError("");
         }
     }
@@ -79,7 +81,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     }
 
     function handleName(){
-        !addAuthor.name ? setNameError("Author name should not be empty") : setNameError("");
+        !addAuthor.author_name ? setNameError("Author name should not be empty") : setNameError("");
     }
 
     function handleBiography(){
@@ -96,7 +98,7 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
                 <Form>
                     <div className="form-group p-2">
                         <label>Author Name*</label>
-                        <input type="text" className={`form-control ${styles.inputHover}`} name="name" value={addAuthor.name} onChange={handleChange} onBlur={handleName}/>
+                        <input type="text" className={`form-control ${styles.inputHover}`} name="author_name" value={addAuthor.author_name} onChange={handleChange} onBlur={handleName}/>
                         {nameError && <div className={`${styles.errorFormField}`}>
                                 {nameError}
                         </div>}

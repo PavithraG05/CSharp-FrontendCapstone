@@ -54,10 +54,10 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                 {!expandIndex && !searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
                 {expandIndex && searchInput && <td className={`${styles.expand} ${styles.justify}`} onClick={()=>expandCell()}>{highlightTask(book.title, searchInput)}</td>}
                 {expandIndex && !searchInput && <td className={`${styles.expand} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
-                <td>{book.publication_date}</td>
+                <td>{book.publication_Date}</td>
                 <td><i class="bi bi-currency-rupee"></i>{book.price}</td>
-                <td>{book.Author.name}</td>
-                <td className="text-capitalize">{book.Genre.genre_name}</td>
+                <td>{book.author.author_Name}</td>
+                <td className="text-capitalize">{book.genre.genre_Name}</td>
                 <td className="text-center"><i className={`bi bi-pencil-square ${styles.biPencilSquare}`} onClick={()=>handleEdit()}></i></td>
                 <td className="text-center"><i className={`bi bi-trash ${styles.biTrash}`} onClick={()=>handleDelete()}></i></td>   
                 <td className="text-center"><i className={`bi ${styles.biInfo} ${index === activeIndex?`${styles.squareFill} bi-caret-up`:"bi-caret-down-fill"}`} onClick={()=>toggleAccordion(index)}></i></td>
@@ -87,17 +87,17 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                                         <div className = "row">
                                             <div classsName="col-xl-6">
                                                 <div className="fw-bold">
-                                                    {book.title} by {book.Author.name} &nbsp; &nbsp;
+                                                    {book.title} by {book.author.author_Name} &nbsp; &nbsp;
                                                 </div>
                                                 <span className={`badge text-bg-light border border-dark ${styles.badgesize} text-capitalize`}>
-                                                    {book.Genre.genre_name}
+                                                    {book.genre.genre_Name}
                                                 </span>
                                                 <div className={styles.subcontent}>
                                                     
                                                     Price: <i class="bi bi-currency-rupee"></i>{book.price}
                                                 </div>
                                                 <div>
-                                                    Publication Date: {book.publication_date}
+                                                    Publication Date: {book.publication_Date}
                                                 </div>
                                             </div>
                                         </div>
@@ -105,11 +105,11 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                                     <div classsName="col-6"> 
                                         <br/>   
                                         <div className="fw-bold">
-                                            About {book.Author.name}:
+                                            About {book.title}:
                                         </div>
                                     
                                         <div className={styles.justify}>
-                                            {book.Author.biography}
+                                            {book.description}
                                         </div>      
                                     </div>
                                 </div>

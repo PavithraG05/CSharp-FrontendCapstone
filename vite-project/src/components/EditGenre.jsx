@@ -9,10 +9,11 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
     const [nameError, setNameError] = useState("");
     const [editGenreForm, setEditGenreForm] = useState({})
     const [editFormErr, setEditFormErr] = useState("");
+    const [apiError, setApiError] = useState("");
 
     const editData = {
-        id: oneGenre.id,
-        genre_name: oneGenre.genre_name
+        id: oneGenre.genre_Id,
+        genre_name: oneGenre.genre_Name
     }
     useEffect(()=>{
         setEditGenreForm(editData)
@@ -28,6 +29,7 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
 
         if(editGenreForm.genre_name){
             const exist = checkGenreNameExist();
+            //updateGenre();
             // console.log(status);
         }
         else{
@@ -38,42 +40,48 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
 
     function updateGenre(){
         console.log("updating")
-        
+        console.log(editGenreForm);
             // setEditFormErr("");
-        fetch(`http://localhost:3000/api/genres/${editGenreForm.id}`,{
+        const token = localStorage.getItem('authToken');
+        fetch(`https://localhost:7226/api/v1/genres/${editGenreForm.id}`,{
             method:"PUT",
-            headers:{"content-type":"application/json"},
+            headers:{'Authorization': `Bearer ${token}`,"content-type":"application/json"},
             body: JSON.stringify({
                 genre_name:editGenreForm.genre_name
             })
             })
-            .then(response => response.json())
-            .then (json => {
+            .then(response => {
+                if(!response.ok) throw new Error(response.status)
+                else{
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');
-                const updated_genre = genres.map((genre) => genre.id === editGenreForm.id ? 
-                                        {...genre,genre_name:editGenreForm.genre_name
-                                        }:genre)
-                setGenres(updated_genre);
-                setEditModal(false);
-                setEditFormErr("");
+                    const updated_genre = genres.map((genre) => genre.genre_Id === editGenreForm.id ? 
+                                            {...genre,genre_Name:editGenreForm.genre_name
+                                            }:genre)
+                    setGenres(updated_genre);
+                    setEditModal(false);
+                    setEditFormErr("");
+                }
             })
-            .catch(err => {
-                console.log(err);
-                setEditFormErr("Error in updating the genre details");
+            .catch(error => {
+                console.log(error);
+                setApiError("Error fetching details using API");
             });
     }
 
     function checkGenreNameExist(){
-        fetch(`http://localhost:3000/api/genres/name/${editGenreForm.genre_name}`,{
-            method:"GET"
+        const token = localStorage.getItem('authToken');
+        fetch(`https://localhost:7226/api/v1/genres/name/${editGenreForm.genre_name}`,{
+            method:"GET",
+            headers:{'Authorization': `Bearer ${token}`}
         })
-        .then((response) => response.json())
+        .then((response) =>  response.json())
         .then((data) => {
-            if(data.id){
+            console.log(data);
+            if(data){
                 console.log(data);
                 setNameError("Genre name already exists")
-                return data.id;
+                return data.genre_Id;
             }
             else{
                 setNameError("")

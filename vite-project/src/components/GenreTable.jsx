@@ -9,7 +9,7 @@ const GenreTable = ({genres, setGenres, displayedItems, searchInput, searchGenre
     useEffect(()=>{
         function filterSearchList(searchInput){
             console.log(searchInput)
-            const filteredGenres = genres.filter(genre => genre.genre_name.toLowerCase().includes(searchInput.toLowerCase()));
+            const filteredGenres = genres.filter(genre => genre.genre_Name.toLowerCase().includes(searchInput.toLowerCase()));
             console.log(`filter: ${JSON.stringify(filteredGenres)}`)
             // setFilterSort(filteredGenres)
             setSearchGenreList(filteredGenres)

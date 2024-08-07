@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import styles from './author.module.css'
 import DeleteAuthor from "./DeleteAuthor"
 import EditAuthor from "./EditAuthor"
+import RestrictDeleteAuthor from "./RestrictDeleteAuthor"
 
 const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
     
@@ -33,10 +34,10 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
         setExpandIndex(!expandIndex)
     }
 
-    function highlightTask(name, searchInput){
+    function highlightTask(author_Name, searchInput){
         // console.log(`desc ${desc}`);
-        if(name){
-            const parts = name.split(new RegExp(`(${searchInput})`,`gi`));
+        if(author_Name){
+            const parts = author_Name.split(new RegExp(`(${searchInput})`,`gi`));
             console.log(`Search parts ${parts}`);
             return parts.map((part,i) => part.toLowerCase() === searchInput.toLowerCase()? <mark key={i}>{part}</mark>:part);
         }
@@ -50,8 +51,8 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
 
             <tr className={`${styles.tableHover}`}>
                 <th scope="row">{index}</th>
-                {!authorSearchInput &&<td>{author.name}</td>}
-                {authorSearchInput &&<td>{highlightTask(author.name, authorSearchInput)}</td>}
+                {!authorSearchInput &&<td>{author.author_Name}</td>}
+                {authorSearchInput &&<td>{highlightTask(author.author_Name, authorSearchInput)}</td>}
                 {!expandIndex && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{author.biography}</td>}
                 {expandIndex && <td className={`${styles.expanded} ${styles.justify}`} onClick={()=>expandCell()}>{author.biography}</td>}
                 <td className="text-center"><i className={`bi bi-pencil-square ${styles.biPencilSquare}`} onClick={()=>handleEdit()}></i></td>
@@ -65,18 +66,19 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
                             <td colSpan="9" className="border border-light">
                                 <div className={`${styles.content}`}>
                                     <div className="fw-bold">
-                                        Book(s) written by {author.name} available in store: {author.Books.length}
+                                        Book(s) written by {author.author_Name} available in store: {author.books.length}
                                     </div>
                                 
                                     {/* <div>
                                         {author.Books[0].title}
                                     </div>        */}
-                                    {author.Books.map((book,index) => {
+                                    {author.books.map((book,index) => {
                                         return(
                                         <div className={styles.booklist}>
                                             {/* {console.log(book.title)} */}
-                                            {index+1}.&nbsp;{book.title}&nbsp; <span className={`badge text-bg-light border border-dark ${styles.badgesize} text-capitalize`}>{book.Genre.genre_name}</span>
+                                            {index+1}.&nbsp;{book.title}&nbsp; <span className={`badge text-bg-light border border-dark ${styles.badgesize} text-capitalize`}></span>
                                         </div>
+                                        // {book.Genre.genre_name}
                                         )
                                     })}
                                 </div>
@@ -85,7 +87,8 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
                     </>
                  )}
             <EditAuthor editAuthorModal={editAuthorModal} setEditAuthorModal={setEditAuthorModal} oneAuthor={oneAuthor} setOneAuthor={setOneAuthor} authors={authors} setAuthors={setAuthors}/>
-            <DeleteAuthor deleteAuthorModalShow={deleteAuthorModalShow} setDeleteAuthorModalShow={setDeleteAuthorModalShow} oneAuthor={oneAuthor} authors={authors} setAuthors={setAuthors} author={author}/>
+            {author.books.length <= 0 && <DeleteAuthor deleteAuthorModalShow={deleteAuthorModalShow} setDeleteAuthorModalShow={setDeleteAuthorModalShow} oneAuthor={oneAuthor} authors={authors} setAuthors={setAuthors} author={author}/>}
+            {author.books.length > 0 && <RestrictDeleteAuthor deleteAuthorModalShow={deleteAuthorModalShow} setDeleteAuthorModalShow={setDeleteAuthorModalShow} oneAuthor={oneAuthor} authors={authors} setAuthors={setAuthors} author={author}/>}
         </>
     )
 }

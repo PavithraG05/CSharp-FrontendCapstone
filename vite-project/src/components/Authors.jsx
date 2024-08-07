@@ -5,7 +5,7 @@ import AddAuthor from './AddAuthor';
 import Pagination from './Pagination';
 import NavBar from './NavBar';
 
-const Authors = ({loginSuccessState, setLoginSuccessState}) => {
+const Authors = ({loginSuccessState, setLoginSuccessState,token}) => {
 
     // const [searchInput, setsearchInput]
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
@@ -24,7 +24,12 @@ const Authors = ({loginSuccessState, setLoginSuccessState}) => {
         async function init(){
             try{
                 setAuthorError("");
-                const response = await fetch(`http://localhost:3000/api/authors`);
+                const token1 = localStorage.getItem("authToken");
+                const response = await fetch(`https://localhost:7226/api/v1/authors`,{
+                    headers: {
+                        Authorization: `Bearer ${token1}`,
+                      }
+                });
                 if(response.ok){
                     let authorsData = await response.json();
                     // json = JSON.parse(json)

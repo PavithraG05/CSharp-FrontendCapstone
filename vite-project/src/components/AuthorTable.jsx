@@ -9,7 +9,7 @@ const AuthorTable = ({authors, setAuthors, authorSearchInput, displayedItems, se
     useEffect(()=>{
         function filterSearchList(searchInput){
             console.log(searchInput)
-            const filteredAuthors = authors.filter(author => author.name.toLowerCase().includes(searchInput.toLowerCase()));
+            const filteredAuthors = authors.filter(author => author.author_Name.toLowerCase().includes(searchInput.toLowerCase()));
             console.log(`filter: ${JSON.stringify(filteredAuthors)}`)
             setSearchAuthorList(filteredAuthors)
             console.log(`filter: ${filteredAuthors.length}`)
@@ -36,7 +36,7 @@ const AuthorTable = ({authors, setAuthors, authorSearchInput, displayedItems, se
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Author Name&nbsp;<i className={`fa ${(sortField==='name'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('name')}></i></th>
+                        <th scope="col">Author Name&nbsp;<i className={`fa ${(sortField==='author_Name'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('author_Name')}></i></th>
                         <th scope="col">Biography&nbsp;<i className={`fa ${(sortField==='biography'|| sortField==='') ? (sort === 0?'fa-sort':sort === 1?'fa-sort-up':'fa-sort-down'): 'fa-sort'} ${styles.mousehover}`} onClick={()=>handleSort('biography')}></i></th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>

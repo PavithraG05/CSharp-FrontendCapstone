@@ -21,10 +21,10 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
         setExpandIndex(!expandIndex)
     }
 
-    function highlightTask(genre_name, searchInput){
+    function highlightTask(genre_Name, searchInput){
         // console.log(`desc ${desc}`);
-        if(genre_name){
-            const parts = genre_name.split(new RegExp(`(${searchInput})`,`gi`));
+        if(genre_Name){
+            const parts = genre_Name.split(new RegExp(`(${searchInput})`,`gi`));
             console.log(`Search parts ${parts}`);
             return parts.map((part,i) => part.toLowerCase() === searchInput.toLowerCase()? <mark key={i}>{part}</mark>:part);
         }
@@ -38,29 +38,29 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
 
             <tr className={`${index === activeIndex ? 'table-active' : ''}`}>
                 <th scope="align-middle row">{index}</th>
-                {searchInput && <td className="text-capitalize">{highlightTask(genre.genre_name, searchInput)}</td>}
-                {!searchInput && <td className="text-capitalize">{genre.genre_name}</td>}
-                <td className={`${styles.genreCol}`}>{genre.Books.length}</td>
+                {searchInput && <td className="text-capitalize">{highlightTask(genre.genre_Name, searchInput)}</td>}
+                {!searchInput && <td className="text-capitalize">{genre.genre_Name}</td>}
+                <td className={`${styles.genreCol}`}>{genre.books.length}</td>
                 {!expandIndex && <td className={`${styles.truncate} align-middle`} onClick={()=>expandCell()}>
-                    {genre.Books.map((book,index) => {
+                    {genre.books.map((book,index) => {
                                         return(
-                                            <span >{book.title} - {book.Author.name}</span> 
+                                            <span >{book.title}</span> 
                                         )
                     })}
-                    {!genre.Books.length &&
+                    {!genre.books.length &&
                        <span>-</span> 
                     }
                 </td>
                 }
                 {expandIndex && <td className={`${styles.expanded}`} onClick={()=>expandCell()}>
-                    {genre.Books.map((book,index) => {
+                    {genre.books.map((book,index) => {
                                         return(
                                             <>
-                                                {index+1}. &nbsp;<span className={styles.genreBooks}>{book.title} - {book.Author.name} </span><br/>
+                                                {index+1}. &nbsp;<span className={styles.genreBooks}>{book.title} </span><br/>
                                             </>
                                         )
                                     })}
-                    {!genre.Books.length &&
+                    {!genre.books.length &&
                         <span>-</span>
                     }
                 </td>

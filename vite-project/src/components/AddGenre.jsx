@@ -29,10 +29,11 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
 
     function addGenreDetails(){
         setApiError("");
-        fetch('http://localhost:3000/api/genres',
+        const token = localStorage.getItem('authToken');
+        fetch('https://localhost:7226/api/v1/genres',
             {
                 method: "POST",
-                headers:{"content-type":"application/json"},
+                headers:{'Authorization': `Bearer ${token}`,"content-type":"application/json"},
                 body: JSON.stringify(addGenre)
             }
         )
@@ -77,20 +78,24 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
     }
 
     function checkGenreNameExist(){
-        fetch(`http://localhost:3000/api/genres/name/${addGenre.genre_name}`,{
-            method:"GET"
+        const token = localStorage.getItem('authToken');
+        console.log(addGenre.genre_name);
+        fetch(`https://localhost:7226/api/v1/genres/name/${addGenre.genre_name}`,{
+            method:"GET",
+            headers:{'Authorization': `Bearer ${token}`}
         })
         .then((response) => response.json())
         .then((data) => {
-            if(data.id){
-                console.log(data);
+            console.log(data);
+            if(data){
+                
                 setGenrenameError("Genre name already exists")
-                return data.id;
+                return data;
             }
             else{
                 setGenrenameError("")
-                addGenreDetails()
-                setAddGenre(genre);
+                addGenreDetails();
+                //setAddGenre(genre);
                 console.log(data);
                 return "";
             }
