@@ -2,6 +2,7 @@ import styles from './login.module.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import LoginNav from './LoginNav';
+import { useToken } from './TokenProvider';
 
 const Login = ({setLoginSuccessState,setToken,token}) => {
 
@@ -19,6 +20,9 @@ const Login = ({setLoginSuccessState,setToken,token}) => {
     const [failuremsg, setFailuremsg] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showPassword, setShowPassword] = useState(true);
+    const {TokenAssign} = useToken();
+    const {authToken} = useToken();
+
 
     // useEffect(()=>{
     //     setLogin(loginData);
@@ -77,6 +81,8 @@ const Login = ({setLoginSuccessState,setToken,token}) => {
             if(data){
                 console.log("Login success");
                 setToken(data);
+                TokenAssign(data);
+                console.log(authToken);
                 localStorage.setItem('authToken', data);
                 console.log(token);
                 setLoginSuccessState(true);

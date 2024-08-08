@@ -6,6 +6,7 @@ import Pagination from './Pagination';
 import useFetch from './useFetch';
 import ExcelDownload from './ExcelDownload';
 import NavBar from './NavBar';
+import { useToken } from './TokenProvider';
 
 const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
     
@@ -20,6 +21,8 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
+    const {authToken} = useToken();
+
     let itemsPerPage = 15;
     // const [bookFunc, setBookFunc] = useState([]);
     // const [entry, setEntry] = useState(15);
@@ -31,7 +34,7 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
     useEffect(()=>{
         async function init(){
             try{
-                console.log(token);
+                console.log(`token: ${authToken}`);
                 setBookError("");
                 const response = await fetch(`https://localhost:7226/api/v1/books`, {
                     headers: {
@@ -311,7 +314,7 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
                         <BookTable books={books} setBooks={setBooks} displayedItems={displayedItems} searchInput={searchInput} searchBookList={searchBookList} setSearchBookList={setSearchBookList} sort={sort} setSort={setSort} sortField={sortField} setSortField={setSortField} filterBookList={filterBookList}/>
 
                     </div>
-                    {/* <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/> */}
+                    <AddBook addModalShow={addModalShow} setAddModalShow={setAddModalShow} books={books} setBooks={setBooks}/>
                 </div>
             </div>
         </div>

@@ -12,9 +12,10 @@ const DeleteBook = ({deleteModalShow, setDeleteModalShow, oneBook, books, setBoo
         filter_books = books.filter((book)=> book.id !== oneBook.id);
         console.log(filter_books);
         console.log(filter_books.length);
-        
-        fetch(`http://localhost:3000/api/books/${oneBook.id}`,{
-            method:"DELETE"
+        const token1 = localStorage.getItem("authToken");
+        fetch(`https://localhost:7226/api/v1/books/${oneBook.id}`,{
+            method:"DELETE",
+            headers:{authorization:`bearer ${token1}`}
             })
             .then(response => {
                 response.json();

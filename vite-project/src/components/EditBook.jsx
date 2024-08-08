@@ -17,8 +17,9 @@ const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
         title: book.title,
         publication_date:book.publication_date,
         price:book.price,
-        genre: book.Genre.genre_name,
-        author: book.Author.name
+        genre: book.genre.genre_name,
+        author: book.author.author_name,
+        description:book.description
     }
     useEffect(()=>{
         setEditBookForm(bookEdit);
@@ -29,8 +30,10 @@ const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
     const [priceError, setPriceError] = useState("");
     const [authorError, setAuthorError] = useState("");
     const [genreError, setGenreError] = useState("");
-    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors");
-    const {data: genres, genresLoading, genresApiError} = useFetch("genres");
+    const [descError, setDescError] = useState("");
+    const token1 = localStorage.getItem("authToken");
+    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",token1);
+    const {data: genres, genresLoading, genresApiError} = useFetch("genres",token1);
 
     // console.log(authors);
     if (authorsLoading) return "Loading...";
@@ -62,6 +65,10 @@ const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
 
     function handleGenre(){
         !editBookForm.genre ? setGenreError("Genre should not be empty") : setGenreError("");
+    }
+
+    function handleDesc(){
+        !editBookForm.description ? setDescError("Description should not be empty") : setDescError("");
     }
 
     function handleSubmit(event){

@@ -42,6 +42,13 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
         }
     }
 
+    function getDate(datetime){
+        if(datetime){
+            let date1 = new Date(datetime).toLocaleDateString('en-US', {year: 'numeric',month: '2-digit',day: '2-digit'});
+            return date1
+        }
+    }
+
     return(
         <>
             {
@@ -54,7 +61,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                 {!expandIndex && !searchInput && <td className={`${styles.truncate} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
                 {expandIndex && searchInput && <td className={`${styles.expand} ${styles.justify}`} onClick={()=>expandCell()}>{highlightTask(book.title, searchInput)}</td>}
                 {expandIndex && !searchInput && <td className={`${styles.expand} ${styles.justify}`} onClick={()=>expandCell()}>{book.title}</td>}
-                <td>{book.publication_Date}</td>
+                <td>{getDate(book.publication_Date)}</td>
                 <td><i class="bi bi-currency-rupee"></i>{book.price}</td>
                 <td>{book.author.author_Name}</td>
                 <td className="text-capitalize">{book.genre.genre_Name}</td>
@@ -97,7 +104,7 @@ const Book = ({book, index, books, setBooks, searchInput}) => {
                                                     Price: <i class="bi bi-currency-rupee"></i>{book.price}
                                                 </div>
                                                 <div>
-                                                    Publication Date: {book.publication_Date}
+                                                    Publication Date: {getDate(book.publication_Date)}
                                                 </div>
                                             </div>
                                         </div>

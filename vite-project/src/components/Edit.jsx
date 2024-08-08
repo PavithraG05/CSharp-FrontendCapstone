@@ -11,25 +11,29 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
     const bookEdit = {
         id: oneBook.id,
         title: oneBook.title,
-        publication_date:oneBook.publication_date,
+        publication_date:oneBook.publication_Date,
         price:oneBook.price,
-        genre: oneBook.Genre.genre_name,
-        genre_id: oneBook.Genre.id,
-        author: oneBook.Author.name,
-        author_id: oneBook.Author.id,
-        biography: oneBook.Author.biography
+        genre: oneBook.genre.genre_Name,
+        genre_id: oneBook.genre.genre_Id,
+        author: oneBook.author.author_Name,
+        author_id: oneBook.author.author_Id,
+        biography: oneBook.author.biography,
+        description: oneBook.description
     }
     useEffect(()=>{
         setEditBookForm(bookEdit);
     },[oneBook])
 
+    const token1 = localStorage.getItem("authToken");
     const [titleError, setTitleError] = useState("");
     const [publicationError, setPublicationError] = useState("");
     const [priceError, setPriceError] = useState("");
     const [authorError, setAuthorError] = useState("");
     const [genreError, setGenreError] = useState("");
-    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors");
-    const {data: genres, genresLoading, genresApiError} = useFetch("genres");
+    const [descError, setDescError] = useState("");
+
+    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",token1);
+    const {data: genres, genresLoading, genresApiError} = useFetch("genres",token1);
     const [editFormErr, setEditFormErr] = useState("")
 
     console.log(authors);
@@ -44,11 +48,21 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
         setEditModal(false)
     }
 
+    function getDate(datetime){
+        if(datetime){
+            const date = new Date(datetime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    }
+
     function handleSubmit(){
         console.log(editBookForm);
         console.log("updating")
         // getBiography()
-        if(editBookForm.title && editBookForm.publication_date && editBookForm.price && editBookForm.genre && editBookForm.author){
+        if(editBookForm.title && editBookForm.publication_date && editBookForm.price && editBookForm.genre && editBookForm.author && editBookForm.description){
             updateBook()
             console.log(`after author bio ${JSON.stringify(editBookForm)}`)
             // console.log(biography)
@@ -62,6 +76,8 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
             !editBookForm.price ? setPriceError("Price should not be empty") : setPriceError("")
             !editBookForm.author ? setAuthorError("Author should not be empty") : setAuthorError("")
             !editBookForm.genre ? setGenreError("Genre should not be empty") : setGenreError("")
+            !editBookForm.description ? setDescError("Description should not be empty") : setDescError("")
+
         }
         
     }
@@ -72,35 +88,43 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
         console.log("updating")
         
             // setEditFormErr("");
-        fetch(`http://localhost:3000/api/books/${editBookForm.id}`,{
+        fetch(`https://localhost:7226/api/v1/books/${editBookForm.id}`,{
             method:"PUT",
-            headers:{"content-type":"application/json"},
+            headers:{authorization:`bearer ${token1}`,"content-type":"application/json"},
             body: JSON.stringify({
                 title:editBookForm.title,
                 publication_date:editBookForm.publication_date,
                 price:editBookForm.price,
                 genre_id:editBookForm.genre_id,
-                author_id:editBookForm.author_id
+                author_id:editBookForm.author_id,
+                description:editBookForm.description
             })
             })
-            .then(response => response.json())
-            .then (json => {
+            .then(response => {
+                if(!response.ok) throw new Error(response.status)
+                else {
                 //$('.toast').toast('show');
                 // alert('Todo status has been updated successfully');
                 const updated_book = books.map((book) => book.id === editBookForm.id ? 
                                     {...book,title:editBookForm.title,
-                                        publication_date:editBookForm.publication_date,
+                                        publication_Date:editBookForm.publication_date,
                                         price:editBookForm.price,
-                                        Genre:{id:editBookForm.genre_id,genre_name:editBookForm.genre},
-                                        Author:{id:editBookForm.author_id,name:editBookForm.author,biography:editBookForm.biography}
+                                        description:editBookForm.description,
+                                        author_Id:editBookForm.author_id,
+                                        genre_Id:editBookForm.genre_id,
+                                        genre:{genre_Id:editBookForm.genre_id,genre_Name:editBookForm.genre},
+                                        author:{author_Id:editBookForm.author_id,author_Name:editBookForm.author,biography:editBookForm.biography},
+
                                     }:book)
+                console.log(updated_book);
                 setBooks(updated_book);
                 setEditModal(false);
                 setEditFormErr("");
+                }
             })
             .catch(err => {
                 console.log(err);
-                setEditFormErr("Error in updating the author details");
+                setEditFormErr("Book with this name already exists");
             });
     }
 
@@ -124,6 +148,9 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
         !editBookForm.genre ? setGenreError("Genre should not be empty") : setGenreError("")
     }
 
+    function handleDesc(){
+        !editBookForm.description ? setDescError("Description should not be empty") : setDescError("")
+    }
 
     function handleChange(e){
         const name = e.target.name;
@@ -164,7 +191,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
 
     return(
         <>
-            {/* {console.log(`${JSON.stringify(bookEdit)}`)} */}
+            {console.log(`${JSON.stringify(editBookForm)}`)}
             {/* {console.log(`${JSON.stringify(editBookForm.title)}`)}
             {console.log(`${JSON.stringify(editBookForm.author)}`)}
             {console.log(`${JSON.stringify(editBookForm.genre)}`)}
@@ -189,7 +216,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                             </div>
                             <div className="form-group p-2">
                                 <label className="form-label">Publication Date*</label>
-                                <input type="date" className={`form-control ${styles.inputHover}`} name="publication_date" value={editBookForm.publication_date} onChange={handleChange} onBlur={handlePublicationDate}/>
+                                <input type="date" className={`form-control ${styles.inputHover}`} name="publication_date" value={getDate(editBookForm.publication_date)} onChange={handleChange} onBlur={handlePublicationDate}/>
                                 {publicationError && <div className={`${styles.errorFormField}`}>
                                         {publicationError}
                                 </div>}
@@ -213,8 +240,8 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
             
                                     {authors && authors.map((option) => {
                                         return (
-                                            <option value={option.name} key={option.id} data-key={option.id} bio-key={option.biography}>
-                                            {option.name}
+                                            <option value={option.author_Name} key={option.author_Id} data-key={option.author_Id} bio-key={option.biography}>
+                                            {option.author_Name}
                                             </option>
                                         );
                                         })}
@@ -231,8 +258,8 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                                     
                                     {genres && genres.map((option) => {
                                         return (
-                                            <option className="text-capitalize" value={option.genre_name} key={option.id} get-key={option.id}>
-                                            {option.genre_name.charAt(0).toUpperCase() + option.genre_name.slice(1)}
+                                            <option className="text-capitalize" value={option.genre_Name} key={option.genre_Id} get-key={option.genre_Id}>
+                                            {option.genre_Name.charAt(0).toUpperCase() + option.genre_Name.slice(1)}
                                             </option>
                                             
                                         );
@@ -245,10 +272,20 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
                                 </div>}
                             </div>
                         </div>
+                        <div>
+                            <div className="form-group p-2">
+                                <label className="form-label">Description*</label>
+                                <textarea className={`form-control`} rows="3"  name="description" value={editBookForm.description} onChange={handleChange} onBlur={handleDesc}></textarea>
+                                {descError && <div className={`${styles.errorFormField}`}>
+                                        {descError}
+                                </div>}
+                            </div> 
+
+                        </div>
                     </div>
-                    {/* {apiErr && <div className={`${styles.errorFormField}`}>
-                        {apiErr}
-                    </div>} */}
+                    {editFormErr && <div className={`${styles.errorFormField}`}>
+                        {editFormErr}
+                    </div>}
                     <br/>
                     {/* {successMessage && <div className={`${styles.successMsg}`}><i className="bi bi-check-circle-fill text-success"></i> &nbsp;{successMessage}</div>} */}
                 </Form>
