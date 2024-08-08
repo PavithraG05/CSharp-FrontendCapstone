@@ -8,7 +8,7 @@ import ExcelDownload from './ExcelDownload';
 import NavBar from './NavBar';
 import { useToken } from './TokenProvider';
 
-const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
+const Books = ({loginSuccessState, setLoginSuccessState}) => {
     
     const [addModalShow, setAddModalShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
@@ -21,7 +21,8 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
-    const {authToken} = useToken();
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     let itemsPerPage = 15;
     // const [bookFunc, setBookFunc] = useState([]);
@@ -29,7 +30,6 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
 
     // itemsPerPage = entry;
     //let token1 = token;
-    let token1 = localStorage.getItem("authToken");
 
     useEffect(()=>{
         async function init(){
@@ -38,7 +38,7 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
                 setBookError("");
                 const response = await fetch(`https://localhost:7226/api/v1/books`, {
                     headers: {
-                      Authorization: `Bearer ${token1}`,
+                      Authorization: `Bearer ${authToken}`,
                     },
                   });
                 if(response.ok){
@@ -74,7 +74,7 @@ const Books = ({loginSuccessState, setLoginSuccessState, token}) => {
         handleFilter();
     },[selectedFilter])
 
-    const {data: genresData, genresLoading, genresApiError} = useFetch("genres",token1);
+    const {data: genresData, genresLoading, genresApiError} = useFetch("genres",authToken);
     if (genresLoading) return "Loading...";
     if(genresApiError) setGenreError("Error fetching genres using API");
 

@@ -4,6 +4,7 @@ import useFetch from './useFetch';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useToken } from './TokenProvider';
 
 const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
 
@@ -20,11 +21,13 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
         biography: oneBook.author.biography,
         description: oneBook.description
     }
+    //const {authToken} = useToken();
+    const authToken = sessionStorage.getItem("authToken");
+
     useEffect(()=>{
         setEditBookForm(bookEdit);
     },[oneBook])
 
-    const token1 = localStorage.getItem("authToken");
     const [titleError, setTitleError] = useState("");
     const [publicationError, setPublicationError] = useState("");
     const [priceError, setPriceError] = useState("");
@@ -32,8 +35,8 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
     const [genreError, setGenreError] = useState("");
     const [descError, setDescError] = useState("");
 
-    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",token1);
-    const {data: genres, genresLoading, genresApiError} = useFetch("genres",token1);
+    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",authToken);
+    const {data: genres, genresLoading, genresApiError} = useFetch("genres",authToken);
     const [editFormErr, setEditFormErr] = useState("")
 
     console.log(authors);
@@ -90,7 +93,7 @@ const Edit = ({oneBook, book, editModal, setEditModal, books, setBooks}) => {
             // setEditFormErr("");
         fetch(`https://localhost:7226/api/v1/books/${editBookForm.id}`,{
             method:"PUT",
-            headers:{authorization:`bearer ${token1}`,"content-type":"application/json"},
+            headers:{authorization:`bearer ${authToken}`,"content-type":"application/json"},
             body: JSON.stringify({
                 title:editBookForm.title,
                 publication_date:editBookForm.publication_date,

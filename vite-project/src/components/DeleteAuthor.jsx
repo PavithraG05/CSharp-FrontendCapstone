@@ -2,10 +2,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import styles from './deleteauthor.module.css';
 import { useState } from 'react';
+import { useToken } from './TokenProvider';
 
 const DeleteAuthor = ({deleteAuthorModalShow, setDeleteAuthorModalShow, oneAuthor, authors, setAuthors, author}) =>{
 
     const [deleteErr, setDeleteErr] = useState("");
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     function deleteBook(){
         let filter_authors = [];
@@ -13,10 +16,9 @@ const DeleteAuthor = ({deleteAuthorModalShow, setDeleteAuthorModalShow, oneAutho
         console.log(filter_authors);
         console.log(filter_authors.length);
         
-        let token1 = localStorage.getItem("authToken");
         fetch(`https://localhost:7226/api/v1/authors/${oneAuthor.author_Id}`,{
             method:"DELETE",
-            headers: {Authorization: `Bearer ${token1}`}
+            headers: {Authorization: `Bearer ${authToken}`}
             })
             .then(response => {
                 if(response.ok){

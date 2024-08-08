@@ -9,6 +9,7 @@ const TokenProvider = ({children}) => {
     const [authToken,setAuthToken] = useState("");
     const TokenAssign = (newToken) => {
         setAuthToken(newToken);
+        console.log("setting token called")
         // You might also store the token in localStorage/sessionStorage here
       };
     return(

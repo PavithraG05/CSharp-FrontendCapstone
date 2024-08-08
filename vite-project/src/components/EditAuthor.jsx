@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './editauthor.module.css';
+import { useToken } from "./TokenProvider";
 
 const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAuthor, authors , setAuthors}) => {
 
@@ -10,6 +11,8 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
     const [biographyError, setBiographyError] = useState("");
     const [editAuthorForm, setEditAuthorForm] = useState({})
     const [editFormErr, setEditFormErr] = useState("");
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     const editData = {
         id: oneAuthor.author_Id,
@@ -41,11 +44,10 @@ const EditAuthor = ({editAuthorModal, setEditAuthorModal, oneAuthor, setOneAutho
 
     function updateAuthor(){
         console.log("updating")
-        let token1 = localStorage.getItem("authToken");
             // setEditFormErr("");
         fetch(`https://localhost:7226/api/v1/authors/${editAuthorForm.id}`,{
             method:"PUT",
-            headers:{Authorization:`Bearer ${token1}`,"content-type":"application/json"},
+            headers:{Authorization:`Bearer ${authToken}`,"content-type":"application/json"},
             body: JSON.stringify({
                 author_name:editAuthorForm.name,
                 biography:editAuthorForm.biography

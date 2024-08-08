@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useFetch from './useFetch';
+import { useToken } from './TokenProvider';
 
 const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
     const book = {
@@ -24,6 +25,8 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
     const [descError, setDescError] = useState("");
     const [apiErr, setApiError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     useEffect(()=>{
         setAddBook(book);
@@ -36,9 +39,8 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
         setDescError("")
     },[addModalShow])
 
-    const token1 = localStorage.getItem("authToken");
-    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",token1);
-    const {data: genres, genresLoading, genresApiError} = useFetch("genres",token1);
+    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",authToken);
+    const {data: genres, genresLoading, genresApiError} = useFetch("genres",authToken);
 
     // console.log(authors);
     if (authorsLoading) return "Loading...";
@@ -57,7 +59,7 @@ const AddBook = ({addModalShow, setAddModalShow, books, setBooks}) => {
         fetch('https://localhost:7226/api/v1/books',
             {
                 method: "POST",
-                headers:{Authorization: `Bearer ${token1}`,"content-type":"application/json"},
+                headers:{Authorization: `Bearer ${authToken}`,"content-type":"application/json"},
                 body: JSON.stringify(addBook)
             }
         )

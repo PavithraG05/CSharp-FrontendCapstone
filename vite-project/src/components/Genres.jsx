@@ -4,8 +4,9 @@ import AddGenre from "./AddGenre";
 import Pagination from './Pagination';
 import GenreTable from "./GenreTable";
 import NavBar from "./NavBar";
+import { useToken } from "./TokenProvider";
 
-const Genres = ({loginSuccessState, setLoginSuccessState, token}) => {
+const Genres = ({loginSuccessState, setLoginSuccessState}) => {
     
     const [addGenreModalShow, setAddGenreModalShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
@@ -17,19 +18,20 @@ const Genres = ({loginSuccessState, setLoginSuccessState, token}) => {
     const [searchGenreList, setSearchGenreList] = useState([])
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     // const [filterSort, setFilterSort] = useState([]);
 
     useEffect(()=>{
         async function init(){
             try{
-                let token1 = localStorage.getItem("authToken");
                 //console.log(token);
-                console.log(token1);
+                console.log(authToken);
                 setGenreError("");
                 const response = await fetch(`https://localhost:7226/api/v1/genres`,{
                     headers: {
-                      Authorization: `Bearer ${token1}`,
+                      Authorization: `Bearer ${authToken}`,
                     },
                   });
                 if(response.ok){

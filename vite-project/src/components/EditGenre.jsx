@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './editgenre.module.css';
+import { useToken } from "./TokenProvider";
 
 const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres}) => {
 
@@ -10,6 +11,8 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
     const [editGenreForm, setEditGenreForm] = useState({})
     const [editFormErr, setEditFormErr] = useState("");
     const [apiError, setApiError] = useState("");
+    //const {authToken} = useToken();
+    const authToken = sessionStorage.getItem('authToken');
 
     const editData = {
         id: oneGenre.genre_Id,
@@ -42,10 +45,9 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
         console.log("updating")
         console.log(editGenreForm);
             // setEditFormErr("");
-        const token = localStorage.getItem('authToken');
         fetch(`https://localhost:7226/api/v1/genres/${editGenreForm.id}`,{
             method:"PUT",
-            headers:{'Authorization': `Bearer ${token}`,"content-type":"application/json"},
+            headers:{Authorization: `Bearer ${authToken}`,"content-type":"application/json"},
             body: JSON.stringify({
                 genre_name:editGenreForm.genre_name
             })
@@ -70,10 +72,10 @@ const EditGenre = ({oneGenre, genre, editModal, setEditModal, genres , setGenres
     }
 
     function checkGenreNameExist(){
-        const token = localStorage.getItem('authToken');
+        //const token = localStorage.getItem('authToken');
         fetch(`https://localhost:7226/api/v1/genres/name/${editGenreForm.genre_name}`,{
             method:"GET",
-            headers:{'Authorization': `Bearer ${token}`}
+            headers:{'Authorization': `Bearer ${authToken}`}
         })
         .then((response) =>  response.json())
         .then((data) => {

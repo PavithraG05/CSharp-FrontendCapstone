@@ -4,8 +4,9 @@ import AuthorTable from './AuthorTable';
 import AddAuthor from './AddAuthor';
 import Pagination from './Pagination';
 import NavBar from './NavBar';
+import { useToken } from './TokenProvider';
 
-const Authors = ({loginSuccessState, setLoginSuccessState,token}) => {
+const Authors = ({loginSuccessState, setLoginSuccessState}) => {
 
     // const [searchInput, setsearchInput]
     const [addAuthorModalShow, setAddAuthorModalShow] = useState(false);
@@ -17,6 +18,8 @@ const Authors = ({loginSuccessState, setLoginSuccessState,token}) => {
     const [totalPages, setTotalPage] = useState(0);
     const [sort, setSort] = useState(0);
     const [sortField, setSortField] = useState("");
+    //const {authToken} = useToken();
+    const authToken = sessionStorage.getItem("authToken");
 
     let itemsPerPage = 15;
 
@@ -24,10 +27,10 @@ const Authors = ({loginSuccessState, setLoginSuccessState,token}) => {
         async function init(){
             try{
                 setAuthorError("");
-                const token1 = localStorage.getItem("authToken");
+                console.log(authToken);
                 const response = await fetch(`https://localhost:7226/api/v1/authors`,{
                     headers: {
-                        Authorization: `Bearer ${token1}`,
+                        Authorization: `Bearer ${authToken}`,
                       }
                 });
                 if(response.ok){

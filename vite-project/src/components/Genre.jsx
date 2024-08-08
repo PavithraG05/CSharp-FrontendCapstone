@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styles from './book.module.css'
 import EditGenre from "./EditGenre"
+import { useToken } from "./TokenProvider"
 
 const Genre = ({genre, index, genres, setGenres, searchInput}) => {
     
@@ -8,7 +9,9 @@ const Genre = ({genre, index, genres, setGenres, searchInput}) => {
     const [activeIndex, setActiveIndex] = useState(null)
     const [editModal, setEditModal] = useState(false);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
-    const [expandIndex, setExpandIndex] = useState(false)
+    const [expandIndex, setExpandIndex] = useState(false);
+    const {authToken} = useToken();
+
     useEffect(()=>{
         setOneGenre(genre);
     },[genre])

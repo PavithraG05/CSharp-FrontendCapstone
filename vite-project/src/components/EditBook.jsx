@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useFetch from './useFetch';
+import { useToken } from './TokenProvider';
 
 const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
     
@@ -13,6 +14,9 @@ const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
     //     publication_date : oneBook.publication_date
     // }
     const [editBookForm, setEditBookForm] = useState({});
+    //const {authToken} = useToken();
+    const authToken = sessionStorage.getItem("authToken");
+    
     const bookEdit = {
         title: book.title,
         publication_date:book.publication_date,
@@ -31,9 +35,8 @@ const EditBook = (editModal, setEditModal, oneBook, setOneBook, book) => {
     const [authorError, setAuthorError] = useState("");
     const [genreError, setGenreError] = useState("");
     const [descError, setDescError] = useState("");
-    const token1 = localStorage.getItem("authToken");
-    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",token1);
-    const {data: genres, genresLoading, genresApiError} = useFetch("genres",token1);
+    const {data: authors, authorsLoading, authorsApiError} = useFetch("authors",authToken);
+    const {data: genres, genresLoading, genresApiError} = useFetch("genres",authToken);
 
     // console.log(authors);
     if (authorsLoading) return "Loading...";

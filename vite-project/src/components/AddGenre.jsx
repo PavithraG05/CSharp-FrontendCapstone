@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useFetch from './useFetch';
-
+import { useToken } from './TokenProvider';
 const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) => {
     const genre = {
         genre_name:""
@@ -14,7 +14,9 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
     const [genrenameError, setGenrenameError] = useState("");
     const [apiErr, setApiError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-
+    //const {authToken} = useToken();
+    const authToken = sessionStorage.getItem('authToken');
+    
     useEffect(()=>{
         setAddGenre(genre);
         setSuccessMessage("")
@@ -29,11 +31,10 @@ const AddGenre = ({addGenreModalShow, setAddGenreModalShow, genres, setGenres}) 
 
     function addGenreDetails(){
         setApiError("");
-        const token = localStorage.getItem('authToken');
         fetch('https://localhost:7226/api/v1/genres',
             {
                 method: "POST",
-                headers:{'Authorization': `Bearer ${token}`,"content-type":"application/json"},
+                headers:{'Authorization': `Bearer ${authToken}`,"content-type":"application/json"},
                 body: JSON.stringify(addGenre)
             }
         )

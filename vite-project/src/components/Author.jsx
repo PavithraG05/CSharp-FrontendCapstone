@@ -11,7 +11,7 @@ const Author = ({author, index, authors, setAuthors, authorSearchInput}) => {
     const [expandIndex, setExpandIndex] = useState(false)
     const [editAuthorModal, setEditAuthorModal] = useState(false);
     const [deleteAuthorModalShow, setDeleteAuthorModalShow] = useState(false);
-
+    
     useEffect(()=>{
         setOneAuthor(author);
         console.log("indide")

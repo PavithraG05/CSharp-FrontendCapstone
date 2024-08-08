@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useToken } from './TokenProvider';
 
 const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAuthors}) => {
     const author = {
@@ -15,6 +16,8 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     const [biographyError, setbiographyError] = useState("");
     const [apiErr, setApiError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    //const {authToken} = useToken();
+    let authToken = sessionStorage.getItem("authToken");
 
     useEffect(()=>{
         setAddAuthor(author);
@@ -29,11 +32,10 @@ const AddAuthor = ({addAuthorModalShow, setAddAuthorModalShow, authors, setAutho
     }
 
     function addAuthorDetails(){
-        let token1 = localStorage.getItem("authToken");
         fetch('https://localhost:7226/api/v1/authors',
             {
                 method: "POST",
-                headers:{ Authorization: `Bearer ${token1}`,"content-type":"application/json"},
+                headers:{ Authorization: `Bearer ${authToken}`,"content-type":"application/json"},
                 body: JSON.stringify(addAuthor)
             }
         )

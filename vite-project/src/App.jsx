@@ -11,27 +11,25 @@ import TokenProvider from "./components/TokenProvider";
 
 function App() {
   const [loginSuccessState, setLoginSuccessState] = useState(true);
-  const [token, setToken] = useState();
+  //const [token, setToken] = useState();
   
-  useEffect(() => {
-    console.log('App component re-rendered');
-  }, [token]);
+
 
   return (
     <div className="App">
-      
+      <TokenProvider>
       {/* <NavBar/> */}
       <BrowserRouter>
           <Routes>
             <Route path="/" element ={<Home/>}/>
-            <Route path="/login" element ={<TokenProvider><Login setLoginSuccessState={setLoginSuccessState} setToken={setToken} token={token}/></TokenProvider>}/>
-            <Route path="/books" element ={<Books loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} token={token}/>}/>
-            <Route path="/authors" element ={<Authors loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} token={token}/>}/>
-            <Route path="/genres" element ={<Genres loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} token={token}/>}/>
+            <Route path="/login" element ={<Login setLoginSuccessState={setLoginSuccessState}/>}/>
+            <Route path="/books" element ={<Books loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} />}/>
+            <Route path="/authors" element ={<Authors loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} />}/>
+            <Route path="/genres" element ={<Genres loginSuccessState={loginSuccessState} setLoginSuccessState={setLoginSuccessState} />}/>
             <Route path="*" element={<PageNotFound/>}/>
           </Routes>
         </BrowserRouter>
-
+        </TokenProvider>
     </div>
   )
 }

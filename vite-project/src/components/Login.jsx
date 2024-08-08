@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LoginNav from './LoginNav';
 import { useToken } from './TokenProvider';
 
-const Login = ({setLoginSuccessState,setToken,token}) => {
+const Login = ({setLoginSuccessState}) => {
 
     const loginData = {
         username:"",
@@ -80,11 +80,11 @@ const Login = ({setLoginSuccessState,setToken,token}) => {
             console.log(data);
             if(data){
                 console.log("Login success");
-                setToken(data);
+                //setToken(data);
                 TokenAssign(data);
                 console.log(authToken);
-                localStorage.setItem('authToken', data);
-                console.log(token);
+                sessionStorage.setItem('authToken', data);
+                //console.log(token);
                 setLoginSuccessState(true);
                 navigate('/books');
             }else{
@@ -96,7 +96,7 @@ const Login = ({setLoginSuccessState,setToken,token}) => {
         .catch((error) => {
             console.log("Login failed");
             setLoginSuccessState(false);
-            localStorage.setItem('authToken', null);
+            sessionStorage.setItem('authToken', null);
             setFailuremsg("Incorrect Username or Password!")
             //setApiError("Error adding details to API");
         });
